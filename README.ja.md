@@ -17,9 +17,9 @@
   &nbsp; / &nbsp;
   <a href="README.zh-CN.md">简体中文</a>
   &nbsp; / &nbsp;
-  <a href="README.ja.md"><strong>日本語</strong></a>
-  &nbsp; / &nbsp;
   <a href="README.zh-TW.md">繁體中文</a>
+  &nbsp; / &nbsp;
+  <a href="README.ja.md"><strong>日本語</strong></a>
 </p>
 
 <p align="center">
@@ -50,13 +50,13 @@ skill が提供するのは、内容を整理するための指示、テンプ�
 
 以下は、このリポジトリで生成したページの実際のスクリーンショットであり、Dia 製品のスクリーンショットではありません。ニュースの例には **2025 年 6 月に起きた過去の出来事**を使用しています。表示を説明するためのもので、最新ニュースではありません。
 
-編集画面は英語・簡体字中国語・日本語・繁体字中国語に対応しています。スクリーンショットは既定の英語版です。各言語のレポート例は[言語](#言語)から確認できます。
+編集画面は英語・簡体字中国語・繁体字中国語・日本語に対応しています。スクリーンショットはこの README と同じ言語で、日本語のレポートと編集画面を示しています。他の言語のレポート例は[言語](#言語)から確認できます。
 
 ### ニュースの要約
 
 温かみのある紙色、結論から始まる導入、指標欄、左側のラベルと右側の説明からなるレイアウトです。
 
-![過去の技術ニュースをまとめたレポートの PC 表示](docs/images/news-desktop.png)
+![過去の技術ニュースをまとめたレポートの PC 表示](docs/images/ja/news-desktop.png)
 
 サンプル：[生成した HTML](examples/i18n/news-brief.ja.html) · [JSON データ](examples/i18n/news-brief.ja.json)
 
@@ -68,13 +68,13 @@ skill が提供するのは、内容を整理するための指示、テンプ�
 
 | スマートフォンでの閲覧 | 外観と保存 |
 | --- | --- |
-| ![ニュースレポートのスマートフォン相当の表示](docs/images/news-mobile.png) | ![夜間の色調とスマートフォン用設定パネル](docs/images/news-mobile-settings.png) |
+| ![ニュースレポートのスマートフォン相当の表示](docs/images/ja/news-mobile.png) | ![夜間の色調とスマートフォン用設定パネル](docs/images/ja/news-mobile-settings.png) |
 
 ### 比較と表
 
 同じテンプレートで比較のためのレポートも作成できます。この架空の例では 3 種類の資料管理方法を比較しています。特定製品の評価や、実際の購入判断のための助言ではありません。
 
-![資料管理方法を比較したレポートの PC 表示](docs/images/comparison-desktop.png)
+![資料管理方法を比較したレポートの PC 表示](docs/images/ja/comparison-desktop.png)
 
 サンプル：[生成した HTML](examples/i18n/report-comparison.ja.html) · [JSON データ](examples/i18n/report-comparison.ja.json)
 
@@ -143,7 +143,7 @@ python3 scripts/render_report.py \
 
 **レポートの言語を選ぶ**
 
-新しいレポートの既定の言語は英語です。JSON の `language` を `en`、`zh-CN`、`ja`、`zh-TW` のいずれかに設定するか、`--language` で編集画面の言語を上書きします。ボタン、通知、日付、フォントの候補が切り替わります。**本文は自動翻訳されません**。AI に指定言語での執筆を依頼するか、翻訳済みの JSON を用意してください。
+新しいレポートの既定の言語は英語です。JSON の `language` を `en`、`zh-CN`、`zh-TW`、`ja` のいずれかに設定するか、`--language` で編集画面の言語を上書きします。ボタン、通知、日付、フォントの候補が切り替わります。**本文は自動翻訳されません**。AI に指定言語での執筆を依頼するか、翻訳済みの JSON を用意してください。
 
 ```bash
 python3 scripts/render_report.py \
@@ -170,8 +170,8 @@ python3 scripts/render_report.py \
 | --- | --- | --- |
 | English | [README.md](README.md) | メイン／既定 |
 | 简体中文 | [README.zh-CN.md](README.zh-CN.md) | 簡体字中国語版 |
-| 日本語 | [README.ja.md](README.ja.md) | この言語版 |
 | 繁體中文 | [README.zh-TW.md](README.zh-TW.md) | 繁体字中国語版 |
+| 日本語 | [README.ja.md](README.ja.md) | この言語版 |
 
 各言語にニュースの要約、比較レポート、対応する JSON を用意しています。HTML はダウンロードするかローカルで開いてください。GitHub では HTML のソースが表示され、レポートは実行されません。`examples/` 直下は既定の英語版です。
 
@@ -179,8 +179,8 @@ python3 scripts/render_report.py \
 | --- | --- | --- |
 | English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) |
 | 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) |
-| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
 | 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) |
+| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
 
 ## リポジトリの内容
 

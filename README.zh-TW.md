@@ -17,9 +17,9 @@
   &nbsp; / &nbsp;
   <a href="README.zh-CN.md">简体中文</a>
   &nbsp; / &nbsp;
-  <a href="README.ja.md">日本語</a>
-  &nbsp; / &nbsp;
   <a href="README.zh-TW.md"><strong>繁體中文</strong></a>
+  &nbsp; / &nbsp;
+  <a href="README.ja.md">日本語</a>
 </p>
 
 <p align="center">
@@ -50,13 +50,13 @@ skill 負責提供內容組織規則、範本和產生腳本，**不是獨立的
 
 以下圖片均為本儲存庫產生頁面的實際截圖，不是 Dia 產品截圖。新聞範例選用 **2025 年 6 月已發生的歷史事件**，用於展示效果，不代表即時新聞。
 
-編輯器現已支援英文、簡體中文、日文和繁體中文。截圖使用預設英文版；對應語言的報告範例見[語言版本](#語言版本)。
+編輯器現已支援英文、簡體中文、繁體中文和日文。截圖與本頁語言一致，展示繁體中文報告及編輯器介面；其他語言的報告範例見[語言版本](#語言版本)。
 
 ### 新聞簡報
 
 暖紙色、結論開場、指標列，以及左側標籤／右側正文的配置。
 
-![歷史科技新聞簡報的桌面截圖](docs/images/news-desktop.png)
+![歷史科技新聞簡報的桌面截圖](docs/images/zh-TW/news-desktop.png)
 
 範例：[HTML 成品](examples/i18n/news-brief.zh-TW.html) · [JSON 資料](examples/i18n/news-brief.zh-TW.json)
 
@@ -68,13 +68,13 @@ skill 負責提供內容組織規則、範本和產生腳本，**不是獨立的
 
 | 手機閱讀 | 外觀與儲存 |
 | --- | --- |
-| ![新聞簡報的手機檢視區截圖](docs/images/news-mobile.png) | ![夜讀色調和手機設定面板截圖](docs/images/news-mobile-settings.png) |
+| ![新聞簡報的手機檢視區截圖](docs/images/zh-TW/news-mobile.png) | ![夜讀色調和手機設定面板截圖](docs/images/zh-TW/news-mobile-settings.png) |
 
 ### 資料選型與比較表
 
 同一套範本也能整理選型問題。這份虛構情境範例比較三種資料管理方式，不對應特定產品，也不是實際採購建議。
 
-![資料選型報告的桌面截圖](docs/images/comparison-desktop.png)
+![資料選型報告的桌面截圖](docs/images/zh-TW/comparison-desktop.png)
 
 範例：[HTML 成品](examples/i18n/report-comparison.zh-TW.html) · [JSON 資料](examples/i18n/report-comparison.zh-TW.json)
 
@@ -142,7 +142,7 @@ python3 scripts/render_report.py \
 
 **選擇報告語言**
 
-新報告預設英文。在 JSON 中將 `language` 設為 `en`、`zh-CN`、`ja` 或 `zh-TW`，也可透過 `--language` 覆寫編輯器語言。按鈕、提示、日期和字型堆疊隨語言調整。**這不會自動翻譯正文**：請讓 AI 依指定語言寫作，或提供已翻譯的 JSON。
+新報告預設英文。在 JSON 中將 `language` 設為 `en`、`zh-CN`、`zh-TW` 或 `ja`，也可透過 `--language` 覆寫編輯器語言。按鈕、提示、日期和字型堆疊隨語言調整。**這不會自動翻譯正文**：請讓 AI 依指定語言寫作，或提供已翻譯的 JSON。
 
 ```bash
 python3 scripts/render_report.py \
@@ -169,8 +169,8 @@ python3 scripts/render_report.py \
 | --- | --- | --- |
 | English | [README.md](README.md) | 主要／預設版本 |
 | 简体中文 | [README.zh-CN.md](README.zh-CN.md) | 簡體中文版本 |
-| 日本語 | [README.ja.md](README.ja.md) | 日文版本 |
 | 繁體中文 | [README.zh-TW.md](README.zh-TW.md) | 目前版本 |
+| 日本語 | [README.ja.md](README.ja.md) | 日文版本 |
 
 每種語言均提供新聞簡報、比較報告和對應 JSON。請下載 HTML 或在本機開啟；GitHub 顯示的是 HTML 原始碼，不會直接執行報告。`examples/` 根目錄為預設英文版。
 
@@ -178,8 +178,8 @@ python3 scripts/render_report.py \
 | --- | --- | --- |
 | English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) |
 | 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) |
-| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
 | 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) |
+| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
 
 ## 儲存庫內容
 
