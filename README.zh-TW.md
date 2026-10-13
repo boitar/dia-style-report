@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(max-width: 640px)" srcset="docs/images/readme-header-mobile.svg">
-    <img src="docs/images/readme-header.svg" alt="Dia Style Report：參考 Dia 文件風格、獨立實作的非官方 skill" width="1600">
+    <source media="(max-width: 640px)" srcset="docs/images/zh-TW/readme-header-mobile.svg">
+    <img src="docs/images/zh-TW/readme-header.svg" alt="Dia 風格報告：參考 Dia 文件風格、獨立實作的非官方技能" width="1600">
   </picture>
 </p>
 

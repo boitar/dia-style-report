@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="460" viewBox="0 0 1600 460" xml:lang="zh-CN" role="img" aria-labelledby="title description">
+  <title id="title">Dia 风格报告</title>
+  <desc id="description">暖纸色编辑风头图，配有报告页面插画。参考 Dia 文档风格的独立、非官方技能。</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f3ec"/>
+      <stop offset="1" stop-color="#ece7dd"/>
+    </linearGradient>
+    <pattern id="lines" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 40H40" fill="none" stroke="#d8d2c6" stroke-opacity=".22"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="460" fill="url(#paper)"/>
+  <rect width="1600" height="460" fill="url(#lines)"/>
+  <path d="M84 94H1070M84 354H1070" fill="none" stroke="#c9c2b5"/>
+  <path d="M1118 64V398" fill="none" stroke="#c9c2b5"/>
+  <g fill="#55504a" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif">
+    <text x="84" y="68" font-size="21" letter-spacing="3">独立实现的报告技能</text>
+    <text x="84" y="287" font-size="32">将零散资料，整理成清晰报告。</text>
+    <text x="84" y="395" font-size="21" letter-spacing="2">阅读 / 编辑 / 保存</text>
+    <text x="1070" y="395" font-size="20" text-anchor="end">独立实现 / 非官方</text>
+  </g>
+  <text x="78" y="225" fill="#1c1a17" font-family="'Songti SC', 'STSong', 'Noto Serif SC', Georgia, serif" font-size="118" letter-spacing="-2">Dia 风格报告</text>
+  <circle cx="1385" cy="236" r="160" fill="#dce3d8" opacity=".7"/>
+  <g transform="translate(1186 66) rotate(3 160 164)">
+    <rect x="9" y="10" width="322" height="326" fill="#d0c9bb" opacity=".45"/>
+    <rect width="322" height="326" fill="#faf8f2" stroke="#b7af9f"/>
+    <text x="25" y="33" fill="#6c655c" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="13" letter-spacing="2">研究手记</text>
+    <text x="298" y="33" fill="#6c655c" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="13" text-anchor="end">01</text>
+    <path d="M24 46H298" fill="none" stroke="#d8d2c6"/>
+    <text x="24" y="90" fill="#1c1a17" font-family="'Songti SC', 'STSong', 'Noto Serif SC', Georgia, serif" font-size="33">更清晰的主线。</text>
+    <path d="M24 110H236M24 123H274" fill="none" stroke="#999184" stroke-width="4"/>
+    <rect x="24" y="144" width="274" height="43" fill="#eee9df" stroke="#d8d2c6"/>
+    <path d="M115 144V187M207 144V187" fill="none" stroke="#d8d2c6"/>
+    <path d="M40 162H84M131 162H175M223 162H267" fill="none" stroke="#6c655c" stroke-width="4"/>
+    <path d="M40 173H72M131 173H163M223 173H255" fill="none" stroke="#c2baac" stroke-width="3"/>
+    <path d="M24 208H298" fill="none" stroke="#1c1a17" stroke-width="2"/>
+    <path d="M24 227H82M106 227H298M106 241H276M106 255H249" fill="none" stroke="#a49b8d" stroke-width="4"/>
+    <path d="M24 274H298" fill="none" stroke="#d8d2c6"/>
+    <text x="24" y="302" fill="#55504a" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="13" letter-spacing="2">一个文件，留住你的文字。</text>
+  </g>
+</svg>

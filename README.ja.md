@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(max-width: 640px)" srcset="docs/images/readme-header-mobile.svg">
-    <img src="docs/images/readme-header.svg" alt="Dia Style Report：Dia のドキュメントのスタイルを参考にした、独立した非公式 skill" width="1600">
+    <source media="(max-width: 640px)" srcset="docs/images/ja/readme-header-mobile.svg">
+    <img src="docs/images/ja/readme-header.svg" alt="Dia スタイルレポート：Dia のドキュメントを参考にした、独立した非公式スキル" width="1600">
   </picture>
 </p>
 
