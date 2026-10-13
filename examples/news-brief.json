@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "id": "example-news-20250624-en",
+  "language": "en",
+  "publication": "Technology notes",
+  "edition": "Historical news · June 2025",
+  "date": "2025-06-24",
+  "title": "Technology is changing more than the interface",
+  "lead": "Three updates highlight visual experience, model availability, and users' everyday choices.",
+  "intro": [
+    "Reading stories together makes patterns easier to see. This brief revisits events from June 2025 as a layout and content example; it is not a live news feed."
+  ],
+  "metrics": [
+    {
+      "value": "3",
+      "label": "Selected stories",
+      "note": "Entries in this example"
+    },
+    {
+      "value": "06.09-06.24",
+      "label": "Event dates",
+      "note": "June 2025"
+    },
+    {
+      "value": "3",
+      "label": "Official sources",
+      "note": "Return to the originals"
+    }
+  ],
+  "sections": [
+    {
+      "title": "I. Three updates worth noting",
+      "items": [
+        {
+          "title": "Apple · Liquid Glass",
+          "tag": "Interface design",
+          "lead": "A new visual material connects interfaces across platforms.",
+          "paragraphs": [
+            "On June 9, 2025, Apple introduced the translucent Liquid Glass material and extended its new design to iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, and tvOS 26."
+          ],
+          "sources": [
+            {
+              "label": "Apple Newsroom",
+              "url": "https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/",
+              "date": "2025-06-09"
+            }
+          ]
+        },
+        {
+          "title": "Google · Gemini 2.5",
+          "tag": "Artificial intelligence",
+          "lead": "Stable releases and a lightweight preview address different needs.",
+          "paragraphs": [
+            "On June 17, 2025, Google announced general availability of Gemini 2.5 Pro and Flash, alongside a Flash-Lite preview. These are distinct release stages and should not be described as identical."
+          ],
+          "sources": [
+            {
+              "label": "Google official blog",
+              "url": "https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/",
+              "date": "2025-06-17"
+            }
+          ]
+        },
+        {
+          "title": "Firefox · 140",
+          "tag": "Browser",
+          "lead": "More everyday operations can be left to the user.",
+          "paragraphs": [
+            "Firefox 140, released on June 24, 2025, supports custom search engines, unloading tabs from the tab context menu, and resizing the pinned section of vertical tabs."
+          ],
+          "sources": [
+            {
+              "label": "Firefox release notes",
+              "url": "https://www.firefox.com/en-US/firefox/140.0/releasenotes/",
+              "date": "2025-06-24"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "II. Reading them together",
+      "paragraphs": [
+        "Editorial observation: interfaces, models, and browsers are different product layers, but one question connects this reading: how do they change the relationship between users and tools? This is an editorial perspective, not an announced shared strategy."
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "Keep one clear thread",
+    "paragraphs": [
+      "A brief does not need to repeat every detail. State what happened and when, then leave a source the reader can check and a question worth pursuing."
+    ]
+  },
+  "footerNote": "Prepared on 2026-10-13 as a retrospective of June 2025 events. Text is a short summary of the linked official sources. Metrics describe this example, not market statistics."
+}

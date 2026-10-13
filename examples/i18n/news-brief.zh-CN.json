@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "id": "example-news-20250624",
+  "language": "zh-CN",
+  "publication": "科技观察",
+  "edition": "历史新闻 · 2025 年 6 月",
+  "date": "2025-06-24",
+  "title": "科技正在改变的，不只是界面",
+  "lead": "三则更新，分别指向视觉体验、模型供给与日常使用的选择权。",
+  "intro": [
+    "把新闻放在一起看，比逐条追赶更容易发现变化。这份简报回顾 2025 年 6 月的已发生事件，仅作为排版与内容组织示例，不代表实时新闻。"
+  ],
+  "metrics": [
+    {
+      "value": "3",
+      "label": "精选新闻",
+      "note": "本示例的条目数量"
+    },
+    {
+      "value": "06.09-06.24",
+      "label": "事件日期",
+      "note": "2025 年 6 月"
+    },
+    {
+      "value": "3",
+      "label": "官方来源",
+      "note": "可回到原文核对"
+    }
+  ],
+  "sections": [
+    {
+      "title": "I. 值得留意的三则更新",
+      "items": [
+        {
+          "title": "Apple · Liquid Glass",
+          "tag": "界面设计",
+          "lead": "新的视觉材料，将多平台的界面语言连在一起。",
+          "paragraphs": [
+            "2025 年 6 月 9 日，Apple 介绍了名为 Liquid Glass 的半透明视觉材料，并将新设计扩展至 iOS 26、iPadOS 26、macOS Tahoe 26、watchOS 26 和 tvOS 26。"
+          ],
+          "sources": [
+            {
+              "label": "Apple Newsroom",
+              "url": "https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/",
+              "date": "2025-06-09"
+            }
+          ]
+        },
+        {
+          "title": "Google · Gemini 2.5",
+          "tag": "人工智能",
+          "lead": "稳定版本与轻量预览，为不同需求提供更多选择。",
+          "paragraphs": [
+            "2025 年 6 月 17 日，Google 宣布 Gemini 2.5 Pro 与 Flash 进入正式可用阶段，并推出 Flash-Lite 预览版。这里区分正式版本与预览版本，不将它们描述为相同的发布状态。"
+          ],
+          "sources": [
+            {
+              "label": "Google 官方博客",
+              "url": "https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/",
+              "date": "2025-06-17"
+            }
+          ]
+        },
+        {
+          "title": "Firefox · 140",
+          "tag": "浏览器",
+          "lead": "更多日常操作，可以交给使用者自己决定。",
+          "paragraphs": [
+            "2025 年 6 月 24 日发布的 Firefox 140，支持添加自定义搜索引擎，并允许通过标签页右键菜单卸载标签页；垂直标签页的固定区域也可以调整大小。"
+          ],
+          "sources": [
+            {
+              "label": "Firefox 发布说明",
+              "url": "https://www.firefox.com/en-US/firefox/140.0/releasenotes/",
+              "date": "2025-06-24"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "II. 放在一起看",
+      "paragraphs": [
+        "编辑观察：界面、模型与浏览器是不同的产品层面，但整理时可以围绕同一个问题展开——它们怎样改变用户与工具的关系？这是一种阅读视角，不是厂商宣布的共同战略。"
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "读完以后，保留一条主线",
+    "paragraphs": [
+      "一份简报不需要复述所有细节。先交代事件与时间，再给读者一个可核对、可继续追问的入口。"
+    ]
+  },
+  "footerNote": "示例制作于 2026-10-13，回顾 2025 年 6 月的历史事件。正文为简短概括，依据为各条目所列官方来源；指标仅描述本示例，不是市场统计。"
+}

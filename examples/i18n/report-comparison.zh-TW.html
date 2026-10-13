@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-ui-language="zh-TW" data-theme="paper" data-font="editorial">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>選型之前，先說清使用情境</title>
+<style>
+:root {
+  --paper:#f4f1ea; --ink:#1c1a17; --soft:#55504a; --mute:#6c655c; --rule:#d8d2c6; --badge:#e7e2d8;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Avenir Next","Segoe UI",-apple-system,BlinkMacSystemFont,sans-serif;
+  --heading:var(--serif); --body:var(--sans); --maxw:760px;
+}
+html[data-ui-language="zh-CN"] { --serif:"Songti SC","STSong","Noto Serif SC",Georgia,"Times New Roman",serif; --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif; }
+html[data-ui-language="zh-TW"] { --serif:"Songti TC","PMingLiU","Noto Serif TC",Georgia,"Times New Roman",serif; --sans:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,sans-serif; }
+html[data-ui-language="ja"] { --serif:"Yu Mincho","Hiragino Mincho ProN","Noto Serif JP",Georgia,"Times New Roman",serif; --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",-apple-system,BlinkMacSystemFont,sans-serif; }
+html[data-theme="white"] { --paper:#fff; --ink:#202020; --soft:#505050; --mute:#686868; --rule:#ddd; --badge:#f0f0f0; }
+html[data-theme="sage"] { --paper:#edf1ed; --ink:#202923; --soft:#48564c; --mute:#58665c; --rule:#c7d1c9; --badge:#dae3db; }
+html[data-theme="night"] { color-scheme:dark; --paper:#20221f; --ink:#eeeee7; --soft:#c5c8bf; --mute:#b0b5a8; --rule:#50564c; --badge:#363c32; }
+html[data-font="modern"] { --heading:var(--sans); --body:var(--sans); }
+html[data-font="serif"] { --heading:var(--serif); --body:var(--serif); }
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html,body { margin:0; }
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { padding:48px 20px 96px; background:var(--paper); color:var(--ink); font:16px/1.75 var(--body); -webkit-font-smoothing:antialiased; }
+button,input { font:inherit; }
+button { cursor:pointer; color:var(--ink); touch-action:manipulation; }
+button:focus-visible,input:focus-visible,a:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+button:disabled { opacity:.45; cursor:default; }
+.wrap { max-width:var(--maxw); margin:0 auto; }
+.skip-link { position:fixed; top:8px; left:8px; z-index:30; padding:8px 12px; background:var(--paper); color:var(--ink); transform:translateY(-200%); }
+.skip-link:focus { transform:none; }
+.report-header { display:flex; flex-wrap:wrap; gap:6px 18px; justify-content:space-between; align-items:baseline; padding-bottom:14px; border-bottom:1px solid var(--rule); font:13px/1.7 var(--sans); color:var(--mute); letter-spacing:.06em; }
+.publication { color:var(--soft); font-weight:600; }
+.headline { font:500 clamp(34px,6vw,52px)/1.16 var(--heading); letter-spacing:-.01em; margin:28px 0 20px; text-wrap:balance; }
+.intro { color:var(--soft); font-size:17px; max-width:64ch; }
+.intro p { margin:0 0 10px; }
+.lead { color:var(--ink); font-weight:600; }
+.metrics { display:grid; grid-template-columns:repeat(var(--metric-count),minmax(0,1fr)); gap:1px; margin:28px 0; background:var(--rule); border:1px solid var(--rule); }
+.metric { background:var(--paper); padding:16px 14px; min-width:0; }
+.metric-value { font:400 28px/1.15 var(--heading); font-variant-numeric:tabular-nums; margin-bottom:6px; }
+.metric-label { color:var(--soft); font:600 13px/1.65 var(--sans); }
+.metric-note { color:var(--mute); font:12px/1.65 var(--sans); margin-top:3px; }
+.report-rule { margin:28px 0; border:0; border-top:1px solid var(--rule); }
+.section { margin:36px 0; }
+.section-heading { font:500 21px/1.45 var(--heading); margin:0 0 18px; padding-bottom:8px; border-bottom:2px solid var(--ink); }
+.section-intro { color:var(--soft); margin:0 0 18px; }
+.prose p { margin:0 0 14px; }
+.item { display:grid; grid-template-columns:170px minmax(0,1fr); gap:24px; padding:18px 0; border-top:1px solid var(--rule); }
+.item:first-child { border-top:0; padding-top:0; }
+.item-label,.item-body { min-width:0; }
+.item-title { font:600 15px/1.5 var(--sans); margin:0 0 8px; }
+.badge { display:inline-block; padding:3px 8px; border-radius:2px; background:var(--badge); color:var(--soft); font:12px/1.5 var(--sans); letter-spacing:.04em; }
+.item-body p { margin:0 0 10px; }
+.item-lead { font-weight:600; }
+.bullets { margin:8px 0 10px; padding-left:18px; color:var(--soft); font-size:14px; }
+.bullets li { margin:4px 0; }
+.sources { display:flex; flex-wrap:wrap; gap:8px 12px; font:12px/1.7 var(--sans); }
+.cite { color:var(--soft); text-decoration:none; border-bottom:1px solid var(--mute); padding:2px 0; }
+.cite:hover { color:var(--ink); }
+.comparison { border-collapse:collapse; width:100%; table-layout:fixed; font-size:14px; margin:20px 0; }
+.comparison caption { text-align:left; font:500 16px/1.6 var(--heading); margin-bottom:10px; }
+.comparison th,.comparison td { text-align:left; vertical-align:top; border-bottom:1px solid var(--rule); padding:12px 10px; overflow-wrap:anywhere; }
+.comparison th { background:var(--badge); font-weight:600; }
+.comparison th:first-child,.comparison td:first-child { padding-left:0; }
+.comparison th:first-child { padding-left:10px; }
+.mobile-label { display:none; }
+.conclusion { margin:38px 0 30px; padding:22px 0; border-top:2px solid var(--ink); border-bottom:1px solid var(--rule); }
+.conclusion h2 { font:500 21px/1.5 var(--heading); margin:0 0 12px; }
+.conclusion p { margin:0 0 10px; }
+.footer-note { color:var(--mute); font:12px/1.75 var(--sans); margin-top:28px; }
+.reading-tip { color:var(--mute); font:12px/1.75 var(--sans); margin-top:28px; }
+[data-edit] { overflow-wrap:anywhere; white-space:pre-wrap; }
+[contenteditable="plaintext-only"],[contenteditable="true"] { cursor:text; border-radius:1px; }
+[contenteditable]:focus { outline:1px dashed var(--mute); outline-offset:5px; }
+@media (hover:hover) { [contenteditable="plaintext-only"]:hover,[contenteditable="true"]:hover { outline:1px dashed var(--rule); outline-offset:5px; } }
+.settings-btn { position:fixed; right:max(24px,env(safe-area-inset-right)); bottom:max(24px,env(safe-area-inset-bottom)); z-index:20; width:48px; height:48px; border:1px solid var(--rule); border-radius:50%; background:var(--paper); display:grid; place-items:center; }
+.settings-btn:hover,.settings-btn[aria-expanded="true"] { background:var(--badge); border-color:var(--mute); }
+.settings-backdrop { display:none; position:fixed; inset:0; z-index:21; background:#00000050; }
+.settings-panel { position:fixed; right:max(24px,env(safe-area-inset-right)); bottom:calc(84px + env(safe-area-inset-bottom)); width:292px; max-width:calc(100vw - 40px); max-height:calc(100dvh - 108px - env(safe-area-inset-bottom)); overflow:auto; overscroll-behavior:contain; z-index:22; padding:20px; border:1px solid var(--rule); border-radius:8px; background:var(--paper); box-shadow:0 8px 32px #00000018; font:14px/1.6 var(--sans); }
+.settings-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.settings-header h2 { margin:0; font-size:16px; font-weight:600; }
+.close-btn { width:44px; height:44px; flex-shrink:0; border:0; border-radius:4px; background:transparent; font-size:24px; line-height:1; }
+.close-btn:hover,.close-btn:active { background:var(--badge); }
+.settings-panel fieldset { border:0; margin:14px 0; padding:0; min-width:0; }
+.settings-panel legend { padding:0; margin-bottom:8px; color:var(--mute); font-size:12px; }
+.theme-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.theme-option { border:1px solid var(--rule); border-radius:4px; background:var(--swatch-paper); color:var(--swatch-ink); padding:10px 2px; min-height:48px; font-size:12px; min-width:0; overflow-wrap:anywhere; }
+.theme-option[aria-pressed="true"],.font-option[aria-pressed="true"] { outline:2px solid var(--ink); outline-offset:2px; }
+.font-options { display:grid; gap:8px; }
+.font-option { border:1px solid var(--rule); border-radius:3px; background:var(--paper); min-height:44px; text-align:left; padding:8px 12px; }
+.font-option[data-font-choice="editorial"],.font-option[data-font-choice="serif"] { font-family:var(--serif); }
+.font-option[data-font-choice="modern"] { font-family:var(--sans); }
+.edit-toggle { display:flex; align-items:center; gap:10px; min-height:44px; margin:10px 0; cursor:pointer; }
+.edit-toggle input { width:18px; height:18px; flex-shrink:0; accent-color:var(--ink); }
+.panel-actions { display:grid; gap:8px; margin-top:12px; }
+.action { border:1px solid var(--rule); border-radius:3px; padding:10px 12px; background:var(--paper); min-height:44px; }
+.action.primary { color:var(--paper); background:var(--ink); border-color:var(--ink); }
+.save-status { font-size:12px; color:var(--mute); margin:12px 0 0; }
+@media (max-width:620px) {
+  body { padding:calc(24px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(104px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left)); line-height:1.8; }
+  .report-header { display:grid; justify-content:start; gap:4px; padding-bottom:12px; letter-spacing:.02em; }
+  .report-date { font-size:12px; }
+  .headline { font-size:clamp(30px,8.2vw,38px); line-height:1.28; margin:24px 0 18px; }
+  .intro { font-size:16px; }
+  .metrics { grid-template-columns:repeat(min(var(--metric-count),2),minmax(0,1fr)); }
+  .metrics .metric:last-child:nth-child(odd) { grid-column:1/-1; }
+  .metric { padding:16px 12px; }
+  .metric-label { font-size:14px; }
+  .metric-note { font-size:13px; }
+  .section { margin:32px 0; }
+  .section-heading,.conclusion h2 { font-size:20px; }
+  .item { grid-template-columns:minmax(0,1fr); gap:10px; padding:20px 0; }
+  .item-label { display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; }
+  .item-title { font-size:16px; margin:0; }
+  .badge { font-size:13px; padding:4px 8px; }
+  .bullets { font-size:16px; }
+  .sources { font-size:14px; gap:8px; }
+  .cite { display:inline-flex; align-items:center; min-height:44px; }
+  .comparison { font-size:16px; }
+  .comparison,.comparison tbody,.comparison tr,.comparison td { display:block; }
+  .comparison caption { display:block; width:100%; }
+  .comparison thead { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); }
+  .comparison tr { border-top:1px solid var(--rule); padding:16px 0; }
+  .comparison td,.comparison td:first-child { display:grid; grid-template-columns:minmax(64px,.32fr) minmax(0,1fr); gap:12px; border:0; padding:6px 0; }
+  .comparison td:first-child .cell-text { font-weight:600; }
+  .mobile-label { display:block; color:var(--mute); font:13px/1.7 var(--sans); overflow-wrap:anywhere; }
+  [data-edit] { scroll-margin:80px 20px; }
+  .publication:focus,.report-date [data-edit]:focus,.metric-label:focus,.metric-note:focus,.badge:focus,.footer-note:focus { font-size:16px; }
+  .settings-btn { right:calc(20px + env(safe-area-inset-right)); bottom:calc(20px + env(safe-area-inset-bottom)); }
+}
+@media (max-width:360px) {
+  body { padding-left:calc(16px + env(safe-area-inset-left)); padding-right:calc(16px + env(safe-area-inset-right)); }
+  .comparison td,.comparison td:first-child { grid-template-columns:minmax(0,1fr); gap:2px; padding:8px 0; }
+}
+@media (max-width:620px), (max-height:500px) and (max-width:900px) {
+  html[data-sheet-open="true"],html[data-sheet-open="true"] body { overflow:hidden; }
+  .settings-backdrop { display:block; }
+  .settings-panel { display:flex; flex-direction:column; left:0; right:0; bottom:0; width:100%; max-width:none; max-height:calc(100vh - 16px - env(safe-area-inset-top)); max-height:calc(100dvh - 16px - env(safe-area-inset-top)); padding:0; overflow:hidden; border-radius:18px 18px 0 0; }
+  .settings-header { flex-shrink:0; margin:0; padding:12px calc(20px + env(safe-area-inset-right)) 12px calc(20px + env(safe-area-inset-left)); border-bottom:1px solid var(--rule); }
+  .settings-content { min-height:0; overflow:auto; overscroll-behavior:contain; padding:0 calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left)); }
+  .font-option,.action,.edit-toggle { min-height:48px; }
+  .theme-option { font-size:14px; }
+  .save-status { margin-bottom:0; }
+}
+@media (prefers-reduced-motion:no-preference) { body,.settings-btn,.settings-panel { transition:background-color .15s,color .15s; } }
+@media print {
+  @page { size:A4; margin:16mm; }
+  html[data-theme="night"] { color-scheme:light; --paper:#fff; --ink:#202020; --soft:#505050; --mute:#686868; --rule:#ddd; --badge:#f0f0f0; }
+  body { padding:0; font-size:11pt; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+  .wrap { max-width:none; }
+  .editor-ui,.reading-tip,.skip-link { display:none!important; }
+  .headline { font-size:28pt; }
+  .intro { font-size:11pt; }
+  .section-heading,.conclusion h2 { break-after:avoid; }
+  .item,.metric,.comparison tr { break-inside:avoid; }
+  p { orphans:3; widows:3; }
+  .cite { border:0; }
+  [contenteditable]:focus,[contenteditable]:hover { outline:none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link editor-ui" href="#report" lang="zh-TW">跳至報告</a>
+<main class="wrap" id="report" tabindex="-1"></main>
+<noscript lang="zh-TW">此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。</noscript>
+<div class="settings-backdrop editor-ui" id="settingsBackdrop" aria-hidden="true" hidden></div>
+<aside class="settings-panel editor-ui" id="settingsPanel" role="dialog" aria-labelledby="settingsTitle" lang="zh-TW" hidden>
+  <div class="settings-header"><h2 id="settingsTitle">外觀與儲存</h2><button class="close-btn" id="closeSettings" aria-label="關閉設定">×</button></div>
+  <div class="settings-content">
+  <fieldset><legend>色調</legend><div class="theme-options" id="themeOptions"></div></fieldset>
+  <fieldset><legend>字型</legend><div class="font-options" id="fontOptions"></div></fieldset>
+  <label class="edit-toggle"><input id="editingToggle" type="checkbox" checked><span>允許編輯文字</span></label>
+  <div class="panel-actions">
+    <button class="action primary" id="saveHTML">儲存 HTML</button>
+    <button class="action" id="undoEdit" disabled>復原上次文字修改</button>
+  </div>
+  <p class="save-status" id="saveStatus" role="status" aria-live="polite">儲存 HTML 會下載包含修改的檔案。</p>
+  </div>
+</aside>
+<button class="settings-btn editor-ui" id="settingsBtn" aria-label="外觀與儲存" aria-controls="settingsPanel" aria-expanded="false" title="外觀與儲存" lang="zh-TW">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82A1.65 1.65 0 0 0 3.16 14H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33A1.65 1.65 0 0 0 10 3.16V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82A1.65 1.65 0 0 0 20.84 10H21a2 2 0 0 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15z"/></svg>
+</button>
+<script id="reportLocales" type="application/json">{"en":{"aliases":["en"],"publication":"Research report","reportTitle":"Dia Style Report","skipReport":"Skip to report","noScript":"Enable JavaScript in your browser to display and edit this report.","settingsTitle":"Appearance & save","closeSettings":"Close settings","themeLabel":"Theme","fontLabel":"Font","editingLabel":"Allow text editing","saveHtml":"Save HTML","undoEdit":"Undo last text edit","initialStatus":"Save HTML downloads a file containing your changes.","readingTip":"Click text to edit it. Use the bottom-right gear to change the theme or font, or save your edited HTML.","editDescription":"Editable text","editDescriptionSingleLine":"Editable text. Press Enter to finish editing.","savedStatus":"Draft saved in this browser. Save HTML to keep a portable copy.","storageUnavailableStatus":"This browser cannot save drafts. Use Save HTML to keep your changes.","draftUnavailableStatus":"Browser drafts are unavailable. Use Save HTML to keep your changes.","exportedStatus":"Download created. Reopen the downloaded HTML to continue editing.","restoredStatus":"Restored a newer draft from this browser.","undoStatus":"Undid the last text edit.","themes":{"paper":"Paper","white":"White","sage":"Sage","night":"Night"},"fonts":{"editorial":"Editorial · serif headings, sans-serif body","modern":"Modern · sans-serif headings and body","serif":"Serif · serif headings and body"}},"zh-CN":{"aliases":["zh","zh-CN","zh-SG","zh-Hans"],"publication":"研究报告","reportTitle":"Dia 风格报告","skipReport":"跳到报告","noScript":"此报告需要浏览器启用 JavaScript 来显示和编辑文字。","settingsTitle":"外观与保存","closeSettings":"关闭设置","themeLabel":"色调","fontLabel":"字体","editingLabel":"允许编辑文字","saveHtml":"保存 HTML","undoEdit":"撤销上次文字修改","initialStatus":"保存 HTML 会下载包含修改的文件。","readingTip":"点文字即可编辑。右下角可换色调、字体，或保存修改后的 HTML。","editDescription":"可直接编辑文字","editDescriptionSingleLine":"可直接编辑文字，Enter 结束编辑","savedStatus":"草稿已保存在本浏览器。保存 HTML 可带走修改。","storageUnavailableStatus":"浏览器无法保存草稿，请使用“保存 HTML”保留修改。","draftUnavailableStatus":"浏览器草稿不可用，请通过“保存 HTML”保留修改。","exportedStatus":"已生成下载。重新打开下载的 HTML 可继续编辑。","restoredStatus":"已恢复本浏览器中的较新草稿。","undoStatus":"已撤销上次文字修改。","themes":{"paper":"暖纸","white":"素白","sage":"青灰","night":"夜读"},"fonts":{"editorial":"书刊 · 宋体标题，黑体正文","modern":"简洁 · 黑体标题与正文","serif":"宋体 · 标题与正文"}},"ja":{"aliases":["ja"],"publication":"調査レポート","reportTitle":"Dia スタイルレポート","skipReport":"レポートへ移動","noScript":"このレポートを表示・編集するには、ブラウザーの JavaScript を有効にしてください。","settingsTitle":"外観と保存","closeSettings":"設定を閉じる","themeLabel":"色調","fontLabel":"フォント","editingLabel":"文字の編集を許可","saveHtml":"HTML を保存","undoEdit":"直前の文字編集を取り消す","initialStatus":"「HTML を保存」で変更を含むファイルをダウンロードできます。","readingTip":"文章をクリックして編集できます。右下の歯車で色調やフォントを変更し、編集した HTML を保存できます。","editDescription":"直接編集できる文章","editDescriptionSingleLine":"直接編集できる文章。Enter で編集を終了します。","savedStatus":"このブラウザーに下書きを保存しました。「HTML を保存」でファイルとして残せます。","storageUnavailableStatus":"このブラウザーでは下書きを保存できません。「HTML を保存」で変更を残してください。","draftUnavailableStatus":"ブラウザーの下書きを利用できません。「HTML を保存」で変更を残してください。","exportedStatus":"ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。","restoredStatus":"このブラウザーから新しい下書きを復元しました。","undoStatus":"直前の文字編集を取り消しました。","themes":{"paper":"ペーパー","white":"ホワイト","sage":"セージ","night":"夜間"},"fonts":{"editorial":"書籍 · 明朝の見出しとゴシックの本文","modern":"シンプル · 見出しも本文もゴシック","serif":"明朝 · 見出しと本文"}},"zh-TW":{"aliases":["zh-TW","zh-HK","zh-MO","zh-Hant"],"publication":"研究報告","reportTitle":"Dia 風格報告","skipReport":"跳至報告","noScript":"此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。","settingsTitle":"外觀與儲存","closeSettings":"關閉設定","themeLabel":"色調","fontLabel":"字型","editingLabel":"允許編輯文字","saveHtml":"儲存 HTML","undoEdit":"復原上次文字修改","initialStatus":"儲存 HTML 會下載包含修改的檔案。","readingTip":"點選文字即可編輯。右下角可切換色調、字型，或儲存修改後的 HTML。","editDescription":"可直接編輯文字","editDescriptionSingleLine":"可直接編輯文字，按 Enter 結束編輯","savedStatus":"草稿已儲存在本瀏覽器。儲存 HTML 可保留可攜式副本。","storageUnavailableStatus":"瀏覽器無法儲存草稿，請使用「儲存 HTML」保留修改。","draftUnavailableStatus":"瀏覽器草稿無法使用，請透過「儲存 HTML」保留修改。","exportedStatus":"已產生下載。重新開啟下載的 HTML 可繼續編輯。","restoredStatus":"已還原本瀏覽器中較新的草稿。","undoStatus":"已復原上次文字修改。","themes":{"paper":"暖紙","white":"素白","sage":"青灰","night":"夜讀"},"fonts":{"editorial":"書刊 · 襯線標題、無襯線正文","modern":"簡潔 · 無襯線標題與正文","serif":"襯線 · 標題與正文"}}}</script>
+<script id="reportState" type="application/json">{"data":{"version":1,"id":"example-report-comparison-zh-TW","language":"zh-TW","publication":"資料整理手記","edition":"虛構情境 · 結構範例","date":"2026-10-13","title":"選型之前，先說清使用情境","lead":"獨自整理、多人協作與長期歸檔，不必一開始就使用同一種方式。","intro":["假設一個小團隊需要整理研究資料：有人在意隨時改稿，有人需要一起討論，還有人只想保存最終結論。以下是用來展示比較表的虛構情境，不對應特定軟體產品。"],"sections":[{"title":"I. 先把不同需求放進同一張表","table":{"caption":"範例決策框架：比較方式，而不是替產品評分","headers":["整理方式","範例中的適用情境","需要考慮的事"],"rows":[["本機檔案與 Markdown","個人持續整理，願意自行維護檔案結構","如何備份、同步與管理附件"],["共享線上文件","多人討論同一份資料，內容經常更新","存取權限、協作約定與離線儲存"],["獨立 HTML 報告","先把資料整理成可閱讀的結論，再交給讀者","儲存修改後的檔案；它不是即時多人協作系統"]]}},{"title":"II. 用項目說明表格未說完的事","items":[{"title":"先考慮讀者","tag":"內容組織","lead":"先知道報告給誰看，再決定正文需要多詳細。","paragraphs":["需要做選擇的讀者，可以先看有條件的結論和比較表；需要追溯依據的讀者，則需要清楚的來源與限制。"]},{"title":"再考慮交付","tag":"報告範圍","lead":"能改稿、能帶走，不等於所有格式都能直接匯出。","bullets":["目前範本可直接編輯並儲存 HTML。","PDF 透過瀏覽器列印處理；尚無 Markdown 匯出按鈕。"]}]}],"conclusion":{"title":"把工具放在需求之後","paragraphs":["先說明情境與限制，再討論適合哪種方式。這份範例展示的是報告結構，不是具體產品的能力評測或採購建議。"]},"footerNote":"虛構情境範例，僅展示比較表、分類項目與結論的組織方式。頁面由本儲存庫產生，不是 Dia 產品截圖。"},"appearance":{"theme":"sage","font":"modern","editing":true},"revision":"e92673a7737c4836c508ef7629db17cdafe863ea4ef36628e17831c5056b3621","updatedAt":0}</script>
+<script>
+(() => {
+  'use strict';
+  const themes = {paper:['#f4f1ea','#1c1a17'],white:['#ffffff','#202020'],sage:['#edf1ed','#202923'],night:['#20221f','#eeeee7']};
+  const locales = JSON.parse(document.getElementById('reportLocales').textContent);
+  const embedded = JSON.parse(document.getElementById('reportState').textContent);
+  const data = JSON.parse(JSON.stringify(embedded.data));
+  function resolveUILanguage(value) {
+    const tag=(typeof value==='string'?value:'en').trim().replace(/_/g,'-').toLowerCase();
+    let selected='en',specificity=-1;
+    for(const [name,entry] of Object.entries(locales))for(const alias of entry.aliases){
+      const key=alias.toLowerCase();
+      if((tag===key||tag.startsWith(key+'-'))&&key.length>specificity){selected=name;specificity=key.length;}
+    }
+    return selected;
+  }
+  const uiLanguage=resolveUILanguage(data.language),ui=locales[uiLanguage],fonts=ui.fonts;
+  let reportLanguage=uiLanguage;
+  try {reportLanguage=Intl.getCanonicalLocales((data.language||'en').trim().replace(/_/g,'-'))[0]||uiLanguage;} catch {}
+  const appearance = {theme:'paper',font:'editorial',editing:true,...embedded.appearance};
+  const fields = new Map(), mirrors = new Map(), edits = {}, history = [];
+  let updatedAt = Number(embedded.updatedAt) || 0, timer, storageAvailable = true, focusBefore = null;
+  const root = document.getElementById('report'), panel = document.getElementById('settingsPanel'), gear = document.getElementById('settingsBtn');
+  const backdrop = document.getElementById('settingsBackdrop'), skip = document.querySelector('.skip-link');
+  const sheetQuery = window.matchMedia('(max-width:620px), (max-height:500px) and (max-width:900px)');
+  const tableQuery = window.matchMedia('(max-width:620px)');
+  const status = document.getElementById('saveStatus'), undo = document.getElementById('undoEdit');
+  const storageKey = 'editorial-report:v1:' + data.id;
+  document.documentElement.dataset.uiLanguage=uiLanguage;
+  const make = (tag,cls,value) => { const n=document.createElement(tag); if(cls)n.className=cls; if(value!==undefined)n.textContent=value; return n; };
+  const read = path => path.split('/').slice(1).reduce((v,key)=>v[key],data);
+  const write = (path,value) => { const keys=path.split('/').slice(1), last=keys.pop(); keys.reduce((v,key)=>v[key],data)[last]=value; };
+  function editable(tag,cls,path,multiline=false) {
+    const el=make(tag,cls,read(path)); el.dataset.edit=path; el.dataset.multiline=String(multiline); el.setAttribute('aria-description',multiline?ui.editDescription:ui.editDescriptionSingleLine);
+    fields.set(path,el); return el;
+  }
+  function paragraphs(parent,values,path,cls='') { (values||[]).forEach((_,i)=>parent.append(editable('p',cls,path+'/'+i,true))); }
+  function tableView(table,path) {
+    const el=make('table','comparison'); el.setAttribute('role','table');
+    if(table.caption)el.append(editable('caption','',path+'/caption'));
+    const head=make('thead'), hr=make('tr'); head.setAttribute('role','rowgroup'); hr.setAttribute('role','row');
+    table.headers.forEach((_,i)=>{ const th=editable('th','',path+'/headers/'+i); th.scope='col'; th.setAttribute('role','columnheader'); hr.append(th); }); head.append(hr); el.append(head);
+    const body=make('tbody'); body.setAttribute('role','rowgroup');
+    table.rows.forEach((row,r)=>{ const tr=make('tr'); row.forEach((_,c)=>{
+      tr.setAttribute('role','row'); const td=make('td'), label=make('span','mobile-label',table.headers[c]); td.setAttribute('role','cell'); label.setAttribute('aria-hidden','true');
+      const hp=path+'/headers/'+c; if(!mirrors.has(hp))mirrors.set(hp,[]); mirrors.get(hp).push(label);
+      td.append(label,editable('span','cell-text',path+'/rows/'+r+'/'+c,true)); tr.append(td);
+    }); body.append(tr); }); el.append(body); return el;
+  }
+  function safeURL(value) { try { const u=new URL(value); return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password ? u.href : null; } catch { return null; } }
+  function render() {
+    root.replaceChildren(); fields.clear(); mirrors.clear();
+    const header=make('header','report-header');
+    header.append(editable('span','publication','/publication'));
+    let dateText=data.date;
+    try { dateText=new Intl.DateTimeFormat(reportLanguage,{year:'numeric',month:'long',day:'numeric',weekday:'long',timeZone:'UTC'}).format(new Date(data.date+'T00:00:00Z')); } catch {}
+    const stamp=make('span','report-date',dateText);
+    if(data.edition){stamp.append(document.createTextNode(' · '),editable('span','','/edition'));} header.append(stamp);
+    root.append(header,editable('h1','headline','/title'));
+    const intro=make('div','intro'); intro.append(editable('p','lead','/lead',true)); paragraphs(intro,data.intro,'/intro'); root.append(intro);
+    if(data.metrics?.length) { const metrics=make('div','metrics'); metrics.style.setProperty('--metric-count',data.metrics.length);
+      data.metrics.forEach((metric,i)=>{ const p='/metrics/'+i,cell=make('div','metric'); cell.append(editable('div','metric-value',p+'/value'),editable('div','metric-label',p+'/label')); if(metric.note!==undefined)cell.append(editable('div','metric-note',p+'/note')); metrics.append(cell); }); root.append(metrics); }
+    root.append(make('hr','report-rule'));
+    let sourceNumber=0;
+    data.sections.forEach((section,i)=>{
+      const p='/sections/'+i, el=make('section','section'); el.append(editable('h2','section-heading',p+'/title'));
+      if(section.intro)el.append(editable('p','section-intro',p+'/intro',true));
+      if(section.paragraphs?.length){const prose=make('div','prose');paragraphs(prose,section.paragraphs,p+'/paragraphs');el.append(prose);}
+      if(section.table)el.append(tableView(section.table,p+'/table'));
+      if(section.items?.length){const items=make('div','section-items');section.items.forEach((item,j)=>{
+        const q=p+'/items/'+j, article=make('article','item'),label=make('div','item-label'),body=make('div','item-body');
+        label.append(editable('h3','item-title',q+'/title')); if(item.tag)label.append(editable('span','badge',q+'/tag'));
+        if(item.lead)body.append(editable('p','item-lead',q+'/lead',true)); paragraphs(body,item.paragraphs,q+'/paragraphs');
+        if(item.bullets?.length){const ul=make('ul','bullets');item.bullets.forEach((_,k)=>ul.append(editable('li','',q+'/bullets/'+k,true)));body.append(ul);}
+        if(item.sources?.length){const sources=make('div','sources');item.sources.forEach(source=>{const href=safeURL(source.url);if(!href)return;const a=make('a','cite','['+(++sourceNumber)+'] '+source.label);a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.title=source.date?source.label+' · '+source.date:source.label;sources.append(a);});body.append(sources);}
+        article.append(label,body);items.append(article);
+      });el.append(items);}root.append(el);
+    });
+    if(data.conclusion){const conclusion=make('section','conclusion');conclusion.append(editable('h2','','/conclusion/title'));paragraphs(conclusion,data.conclusion.paragraphs,'/conclusion/paragraphs');root.append(conclusion);}
+    if(data.footerNote)root.append(editable('p','footer-note','/footerNote',true));
+    const tip=make('p','reading-tip editor-ui',ui.readingTip);tip.lang=uiLanguage;root.append(tip);
+    document.documentElement.lang=reportLanguage; document.title=data.title;
+  }
+  function applyAppearance() {
+    if(!Object.hasOwn(themes,appearance.theme))appearance.theme='paper';
+    if(!Object.hasOwn(fonts,appearance.font))appearance.font='editorial';
+    appearance.editing=appearance.editing!==false;
+    document.documentElement.dataset.theme=appearance.theme; document.documentElement.dataset.font=appearance.font;
+    for(const el of fields.values()){el.contentEditable=appearance.editing?'plaintext-only':'false';if(appearance.editing)el.tabIndex=el.tagName==='TH'&&tableQuery.matches?-1:0;else el.removeAttribute('tabindex');}
+    document.querySelectorAll('[data-theme-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.themeChoice===appearance.theme)));
+    document.querySelectorAll('[data-font-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.fontChoice===appearance.font)));
+    document.getElementById('editingToggle').checked=appearance.editing;
+  }
+  function update(path,value) {
+    if(!fields.has(path)||typeof value!=='string')return;
+    write(path,value); edits[path]=value;
+    for(const mirror of mirrors.get(path)||[])mirror.textContent=value;
+    if(path==='/title')document.title=value||ui.reportTitle;
+  }
+  function persist() {
+    clearTimeout(timer);
+    try { localStorage.setItem(storageKey,JSON.stringify({revision:embedded.revision,updatedAt,edits,appearance}));storageAvailable=true;status.textContent=ui.savedStatus; }
+    catch {storageAvailable=false;status.textContent=ui.storageUnavailableStatus;}
+  }
+  function changed() {updatedAt=Math.max(Date.now(),updatedAt+1);clearTimeout(timer);timer=setTimeout(persist,350);}
+  function syncPanelMode() {
+    const modal=!panel.hidden&&sheetQuery.matches;
+    backdrop.hidden=!modal; root.inert=modal; gear.inert=modal; skip.inert=modal;
+    if(modal){panel.setAttribute('aria-modal','true');document.documentElement.dataset.sheetOpen='true';}
+    else {panel.removeAttribute('aria-modal');delete document.documentElement.dataset.sheetOpen;}
+  }
+  function showPanel(open,restore=false) {
+    panel.hidden=!open;gear.setAttribute('aria-expanded',String(open));
+    syncPanelMode();
+    if(open){const selected=panel.querySelector('[data-theme-choice][aria-pressed="true"]');selected?.focus();}
+    else if(restore)gear.focus();
+  }
+  function downloadHTML() {
+    if(document.activeElement?.dataset.edit)document.activeElement.blur();
+    persist();
+    const clone=document.documentElement.cloneNode(true);
+    clone.querySelector('#report').replaceChildren();
+    clone.querySelector('#themeOptions').replaceChildren(); clone.querySelector('#fontOptions').replaceChildren();
+    clone.querySelector('#settingsPanel').hidden=true;clone.querySelector('#settingsBtn').setAttribute('aria-expanded','false');clone.querySelector('#undoEdit').disabled=true;
+    clone.querySelector('#settingsPanel').removeAttribute('aria-modal');clone.querySelector('#settingsBackdrop').hidden=true;
+    clone.querySelector('#report').inert=false;clone.querySelector('#settingsBtn').inert=false;clone.querySelector('.skip-link').inert=false;delete clone.dataset.sheetOpen;
+    clone.querySelector('#saveStatus').textContent=ui.initialStatus;
+    const snapshot={data,appearance,revision:embedded.revision,updatedAt};
+    clone.querySelector('#reportState').textContent=JSON.stringify(snapshot).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
+    const blob=new Blob(['<!DOCTYPE html>\n',clone.outerHTML],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=make('a');
+    a.href=url;a.download='report-'+data.date+'.html';a.hidden=true;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+    status.textContent=ui.exportedStatus;
+  }
+  render();
+  try {
+    const draft=JSON.parse(localStorage.getItem(storageKey)||'null');
+    if(draft&&draft.revision===embedded.revision&&Number(draft.updatedAt)>updatedAt){
+      for(const [path,value]of Object.entries(draft.edits||{})){if(fields.has(path)&&typeof value==='string'){update(path,value);fields.get(path).textContent=value;}}
+      if(draft.appearance&&typeof draft.appearance==='object')Object.assign(appearance,draft.appearance);
+      updatedAt=Number(draft.updatedAt);status.textContent=ui.restoredStatus;
+    }
+  } catch {storageAvailable=false;status.textContent=ui.draftUnavailableStatus;}
+  for(const [key,[paper,ink]]of Object.entries(themes)){const b=make('button','theme-option',ui.themes[key]);b.dataset.themeChoice=key;b.style.setProperty('--swatch-paper',paper);b.style.setProperty('--swatch-ink',ink);b.addEventListener('click',()=>{appearance.theme=key;applyAppearance();changed();});document.getElementById('themeOptions').append(b);}
+  for(const [key,name]of Object.entries(fonts)){const b=make('button','font-option',name);b.dataset.fontChoice=key;b.addEventListener('click',()=>{appearance.font=key;applyAppearance();changed();});document.getElementById('fontOptions').append(b);}
+  applyAppearance();
+  gear.addEventListener('click',()=>showPanel(panel.hidden));
+  backdrop.addEventListener('click',()=>showPanel(false,true));
+  sheetQuery.addEventListener('change',syncPanelMode);
+  tableQuery.addEventListener('change',applyAppearance);
+  document.getElementById('closeSettings').addEventListener('click',()=>showPanel(false,true));
+  document.getElementById('editingToggle').addEventListener('change',event=>{appearance.editing=event.target.checked;applyAppearance();changed();});
+  document.getElementById('saveHTML').addEventListener('click',downloadHTML);
+  undo.addEventListener('click',()=>{const entry=history.pop();if(!entry)return;update(entry.path,entry.before);fields.get(entry.path).textContent=entry.before;undo.disabled=!history.length;changed();status.textContent=ui.undoStatus;});
+  root.addEventListener('focusin',event=>{const el=event.target;if(el.dataset.edit)focusBefore={path:el.dataset.edit,value:read(el.dataset.edit)};});
+  root.addEventListener('focusout',event=>{const el=event.target;if(el.dataset.edit&&focusBefore?.path===el.dataset.edit){const after=read(el.dataset.edit);if(after!==focusBefore.value){history.push({path:el.dataset.edit,before:focusBefore.value,after});if(history.length>50)history.shift();undo.disabled=false;}focusBefore=null;}});
+  root.addEventListener('input',event=>{const el=event.target;if(!el.dataset.edit)return;update(el.dataset.edit,el.innerText.replace(/\r\n?/g,'\n'));changed();});
+  root.addEventListener('paste',event=>{const el=event.target.closest('[data-edit]');if(!el||!appearance.editing)return;event.preventDefault();const plain=event.clipboardData.getData('text/plain');document.execCommand('insertText',false,plain);});
+  root.addEventListener('drop',event=>{if(event.target.closest('[data-edit]'))event.preventDefault();});
+  root.addEventListener('keydown',event=>{const el=event.target;if(!el.dataset.edit)return;if(event.key==='Escape'||(event.key==='Enter'&&el.dataset.multiline==='false'&&!event.isComposing)){event.preventDefault();el.blur();}});
+  document.addEventListener('keydown',event=>{
+    if(panel.hidden)return;
+    if(event.key==='Escape'){event.preventDefault();showPanel(false,true);}
+    else if(event.key==='Tab'&&sheetQuery.matches){
+      const controls=Array.from(panel.querySelectorAll('button:not(:disabled),input:not(:disabled)')),first=controls[0],last=controls[controls.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  document.addEventListener('pointerdown',event=>{if(!panel.hidden&&!sheetQuery.matches&&!panel.contains(event.target)&&!gear.contains(event.target))showPanel(false);});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&timer)persist();});
+  window.addEventListener('pagehide',()=>{if(timer)persist();});
+})();
+</script>
+</body>
+</html>

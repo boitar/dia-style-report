@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" role="img" aria-labelledby="title description">
+  <title id="title">Dia Style Report</title>
+  <desc id="description">A warm-paper editorial cover for narrow screens. An unofficial skill inspired by Dia's document style.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f3ec"/>
+      <stop offset="1" stop-color="#ece7dd"/>
+    </linearGradient>
+    <pattern id="lines" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 40H40" fill="none" stroke="#d8d2c6" stroke-opacity=".22"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="560" fill="url(#paper)"/>
+  <rect width="800" height="560" fill="url(#lines)"/>
+  <path d="M48 94H752M48 431H752" fill="none" stroke="#c9c2b5"/>
+  <g fill="#55504a" font-family="Helvetica, 'PingFang SC', sans-serif">
+    <text x="48" y="66" font-size="22" letter-spacing="2">AN INDEPENDENT REPORT SKILL</text>
+    <text x="48" y="384" font-size="30">From scattered notes to clear reports.</text>
+    <text x="48" y="478" font-size="22" letter-spacing="2">READ / EDIT / KEEP</text>
+    <text x="48" y="519" font-size="22">INDEPENDENT / UNOFFICIAL</text>
+  </g>
+  <g fill="#1c1a17" font-family="Georgia, 'Times New Roman', serif" letter-spacing="-3">
+    <text x="43" y="217" font-size="104">Dia Style</text>
+    <text x="43" y="326" font-size="104">Report</text>
+  </g>
+  <g transform="translate(600 171) rotate(5 66 74)">
+    <circle cx="62" cy="74" r="96" fill="#dce3d8" opacity=".7"/>
+    <rect x="5" y="6" width="128" height="151" fill="#d0c9bb" opacity=".45"/>
+    <rect width="128" height="151" fill="#faf8f2" stroke="#b7af9f"/>
+    <path d="M16 24H73M16 38H111" fill="none" stroke="#1c1a17" stroke-width="5"/>
+    <path d="M16 60H111M16 73H97" fill="none" stroke="#a49b8d" stroke-width="4"/>
+    <rect x="16" y="91" width="95" height="23" fill="#eee9df" stroke="#d8d2c6"/>
+    <path d="M48 91V114M79 91V114" fill="none" stroke="#d8d2c6"/>
+    <path d="M16 132H111" fill="none" stroke="#a49b8d" stroke-width="4"/>
+  </g>
+</svg>

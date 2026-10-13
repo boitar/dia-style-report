@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dia Style Report"
+  short_description: "Editable HTML reports with multilingual UI and themes"
+  default_prompt: "Use $dia-style-report to turn my question into an editable HTML report in my requested language."

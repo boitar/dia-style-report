@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "id": "example-news-20250624-ja",
+  "language": "ja",
+  "publication": "テクノロジー観察",
+  "edition": "過去のニュース · 2025 年 6 月",
+  "date": "2025-06-24",
+  "title": "変わるのは、インターフェースだけではない",
+  "lead": "三つの更新から、見た目、モデルの提供、日常の選択肢の変化を読む。",
+  "intro": [
+    "ニュースを並べて読むと、個別の記事だけでは見えにくい変化に気づけます。これは 2025 年 6 月の出来事を振り返る構成と表示のサンプルであり、最新ニュースではありません。"
+  ],
+  "metrics": [
+    {
+      "value": "3",
+      "label": "選んだニュース",
+      "note": "この例に含む記事数"
+    },
+    {
+      "value": "06.09-06.24",
+      "label": "出来事の日付",
+      "note": "2025 年 6 月"
+    },
+    {
+      "value": "3",
+      "label": "公式の出典",
+      "note": "原文を確認できる入口"
+    }
+  ],
+  "sections": [
+    {
+      "title": "I. 注目したい三つの更新",
+      "items": [
+        {
+          "title": "Apple · Liquid Glass",
+          "tag": "画面デザイン",
+          "lead": "新しい視覚素材で、複数のプラットフォームの画面をつなぐ。",
+          "paragraphs": [
+            "2025 年 6 月 9 日、Apple は半透明の視覚素材 Liquid Glass を紹介し、新しいデザインを iOS 26、iPadOS 26、macOS Tahoe 26、watchOS 26、tvOS 26 に広げました。"
+          ],
+          "sources": [
+            {
+              "label": "Apple Newsroom",
+              "url": "https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/",
+              "date": "2025-06-09"
+            }
+          ]
+        },
+        {
+          "title": "Google · Gemini 2.5",
+          "tag": "人工知能",
+          "lead": "安定版と軽量なプレビュー版で、異なる用途に応える。",
+          "paragraphs": [
+            "2025 年 6 月 17 日、Google は Gemini 2.5 Pro と Flash の一般提供開始を発表し、Flash-Lite のプレビュー版も公開しました。正式版とプレビュー版は異なる提供段階として区別します。"
+          ],
+          "sources": [
+            {
+              "label": "Google 公式ブログ",
+              "url": "https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/",
+              "date": "2025-06-17"
+            }
+          ]
+        },
+        {
+          "title": "Firefox · 140",
+          "tag": "ブラウザー",
+          "lead": "日常の操作を、利用者自身がより選べるようにする。",
+          "paragraphs": [
+            "2025 年 6 月 24 日公開の Firefox 140 では、独自の検索エンジンの追加、タブの右クリックメニューからのアンロード、縦型タブの固定領域のサイズ変更に対応しました。"
+          ],
+          "sources": [
+            {
+              "label": "Firefox リリースノート",
+              "url": "https://www.firefox.com/en-US/firefox/140.0/releasenotes/",
+              "date": "2025-06-24"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "II. 並べて読む",
+      "paragraphs": [
+        "編集上の見方：画面、モデル、ブラウザーは別の製品領域ですが、「利用者と道具の関係をどう変えるか」という問いで整理できます。これは読み解くための視点であり、各社が発表した共通戦略ではありません。"
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "読み終えたら、一つの主題を残す",
+    "paragraphs": [
+      "すべての細部を繰り返す必要はありません。何がいつ起きたかを示し、読者が確認できる出典と、さらに考えられる問いを残します。"
+    ]
+  },
+  "footerNote": "2026-10-13 に作成した、2025 年 6 月の出来事を振り返るサンプルです。本文は掲載した公式出典の短い要約です。指標はこのサンプルの情報であり、市場統計ではありません。"
+}
