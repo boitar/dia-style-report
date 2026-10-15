@@ -22,6 +22,9 @@
     "exportedStatus": "Download created. Reopen the downloaded HTML to continue editing.",
     "restoredStatus": "Restored a newer draft from this browser.",
     "undoStatus": "Undid the last text edit.",
+    "chartBaseline": "Axis starts at {min}, not zero. Bar lengths show differences above this baseline.",
+    "chartScrollHint": "Scroll within the chart to read all labels.",
+    "chartPointHint": "Hover or focus to read details. Click, Enter or Space pins or closes them; Escape dismisses.",
     "themes": {"paper": "Paper", "white": "White", "sage": "Sage", "night": "Night"},
     "fonts": {
       "editorial": "Editorial · serif headings, sans-serif body",
@@ -52,6 +55,9 @@
     "exportedStatus": "已生成下载。重新打开下载的 HTML 可继续编辑。",
     "restoredStatus": "已恢复本浏览器中的较新草稿。",
     "undoStatus": "已撤销上次文字修改。",
+    "chartBaseline": "坐标轴从 {min} 开始，并非零基线；柱长表示高于该起点的差值。",
+    "chartScrollHint": "可在图表区域横向滚动，查看完整标签。",
+    "chartPointHint": "悬停或聚焦查看明细；点按、Enter 或空格可固定或关闭，Escape 关闭。",
     "themes": {"paper": "暖纸", "white": "素白", "sage": "青灰", "night": "夜读"},
     "fonts": {
       "editorial": "书刊 · 宋体标题，黑体正文",
@@ -82,6 +88,9 @@
     "exportedStatus": "ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。",
     "restoredStatus": "このブラウザーから新しい下書きを復元しました。",
     "undoStatus": "直前の文字編集を取り消しました。",
+    "chartBaseline": "軸の起点は {min} で、ゼロではありません。棒の長さは起点からの差を示します。",
+    "chartScrollHint": "グラフ内を横にスクロールすると、すべてのラベルを確認できます。",
+    "chartPointHint": "ホバーまたはフォーカスで詳細を表示。クリック、Enter、スペースで固定・解除、Escape で閉じます。",
     "themes": {"paper": "ペーパー", "white": "ホワイト", "sage": "セージ", "night": "夜間"},
     "fonts": {
       "editorial": "書籍 · 明朝の見出しとゴシックの本文",
@@ -112,6 +121,9 @@
     "exportedStatus": "已產生下載。重新開啟下載的 HTML 可繼續編輯。",
     "restoredStatus": "已還原本瀏覽器中較新的草稿。",
     "undoStatus": "已復原上次文字修改。",
+    "chartBaseline": "座標軸從 {min} 開始，並非零基線；柱長表示高於該起點的差值。",
+    "chartScrollHint": "可在圖表區域橫向捲動，查看完整標籤。",
+    "chartPointHint": "懸停或聚焦查看明細；點按、Enter 或空白鍵可固定或關閉，Escape 關閉。",
     "themes": {"paper": "暖紙", "white": "素白", "sage": "青灰", "night": "夜讀"},
     "fonts": {
       "editorial": "書刊 · 襯線標題、無襯線正文",

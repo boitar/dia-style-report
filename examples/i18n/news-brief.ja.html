@@ -66,6 +66,36 @@ button:disabled { opacity:.45; cursor:default; }
 .comparison th:first-child,.comparison td:first-child { padding-left:0; }
 .comparison th:first-child { padding-left:10px; }
 .mobile-label { display:none; }
+.chart-entry { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:24px; align-items:start; margin:28px 0 44px; }
+.chart-copy,.chart-figure { min-width:0; }
+.chart-title { font:500 16px/1.55 var(--sans); margin:0 0 12px; }
+.chart-description { color:var(--soft); font-size:14px; margin:0; }
+.chart-figure { margin:0; }
+.chart-viewport { max-width:100%; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; padding:6px 2px; }
+.chart-svg { display:block; max-width:none; font:12px/1.4 var(--sans); overflow:visible; }
+.chart-grid { stroke:var(--rule); stroke-width:1; opacity:.65; vector-effect:non-scaling-stroke; }
+.chart-axis { stroke:var(--rule); stroke-width:1; vector-effect:non-scaling-stroke; }
+.chart-axis-text { fill:var(--mute); }
+.chart-bar { vector-effect:non-scaling-stroke; }
+.chart-bar.solid { fill:var(--soft); stroke:var(--soft); stroke-width:1; }
+.chart-bar.outlined { fill:var(--soft); fill-opacity:.08; stroke:var(--mute); stroke-width:1.4; }
+.chart-bar.muted { fill:var(--badge); stroke:var(--mute); }
+.chart-point { cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+.chart-hit { fill:transparent; stroke:transparent; vector-effect:non-scaling-stroke; }
+.chart-point:focus { outline:none; }
+.chart-point:focus-visible .chart-hit { stroke:var(--ink); stroke-width:2; }
+.chart-point[data-active="true"] .chart-bar { stroke:var(--ink); stroke-width:2; }
+.chart-caption,.chart-baseline,.chart-scroll-hint { color:var(--mute); font:12px/1.7 var(--sans); margin:12px 0 0; overflow-wrap:anywhere; }
+.chart-baseline,.chart-scroll-hint { margin-top:5px; }
+.chart-tooltip { position:fixed; z-index:19; max-width:min(300px,calc(100vw - 24px)); color:#fff; background:#303030fa; border-radius:2px; font:14px/1.5 var(--sans); box-shadow:0 2px 8px #00000012; }
+.chart-tooltip-content { padding:10px 12px; max-height:calc(100dvh - 16px); overflow:auto; overflow-wrap:anywhere; }
+.chart-tooltip::before { content:""; position:absolute; top:var(--arrow-y,20px); width:0; height:0; border:6px solid transparent; transform:translateY(-50%); pointer-events:none; }
+.chart-tooltip[data-side="right"]::before { right:100%; border-right-color:#303030fa; }
+.chart-tooltip[data-side="left"]::before { left:100%; border-left-color:#303030fa; }
+.chart-tooltip-title { display:block; margin-bottom:5px; font-weight:600; white-space:pre-wrap; }
+.chart-tooltip-row { margin:0; white-space:pre-wrap; }
+.chart-tooltip-marker { display:inline-block; width:10px; height:10px; margin-right:6px; background:#e8e8e8; border:1px solid #aaa; }
+.chart-tooltip-detail { padding-left:16px; }
 .conclusion { margin:38px 0 30px; padding:22px 0; border-top:2px solid var(--ink); border-bottom:1px solid var(--rule); }
 .conclusion h2 { font:500 21px/1.5 var(--heading); margin:0 0 12px; }
 .conclusion p { margin:0 0 10px; }
@@ -114,6 +144,9 @@ button:disabled { opacity:.45; cursor:default; }
   .item { grid-template-columns:minmax(0,1fr); gap:10px; padding:20px 0; }
   .item-label { display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; }
   .item-title { font-size:16px; margin:0; }
+  .chart-entry { grid-template-columns:minmax(0,1fr); gap:18px; margin:24px 0 36px; }
+  .chart-title { font-size:16px; margin-bottom:8px; }
+  .chart-description { font-size:16px; }
   .badge { font-size:13px; padding:4px 8px; }
   .bullets { font-size:16px; }
   .sources { font-size:14px; gap:8px; }
@@ -147,6 +180,7 @@ button:disabled { opacity:.45; cursor:default; }
 @media (prefers-reduced-motion:no-preference) { body,.settings-btn,.settings-panel { transition:background-color .15s,color .15s; } }
 @media print {
   @page { size:A4; margin:16mm; }
+  *,*::before,*::after { transition:none!important; animation:none!important; }
   html[data-theme="night"] { color-scheme:light; --paper:#fff; --ink:#202020; --soft:#505050; --mute:#686868; --rule:#ddd; --badge:#f0f0f0; }
   body { padding:0; font-size:11pt; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
   .wrap { max-width:none; }
@@ -155,6 +189,11 @@ button:disabled { opacity:.45; cursor:default; }
   .intro { font-size:11pt; }
   .section-heading,.conclusion h2 { break-after:avoid; }
   .item,.metric,.comparison tr { break-inside:avoid; }
+  .chart-entry { break-inside:avoid; }
+  .chart-viewport { overflow:visible; }
+  .chart-svg { width:100%!important; height:auto!important; }
+  .chart-scroll-hint { display:none; }
+  .chart-hit { visibility:hidden; }
   p { orphans:3; widows:3; }
   .cite { border:0; }
   [contenteditable]:focus,[contenteditable]:hover { outline:none; }
@@ -182,7 +221,7 @@ button:disabled { opacity:.45; cursor:default; }
 <button class="settings-btn editor-ui" id="settingsBtn" aria-label="外観と保存" aria-controls="settingsPanel" aria-expanded="false" title="外観と保存" lang="ja">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82A1.65 1.65 0 0 0 3.16 14H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33A1.65 1.65 0 0 0 10 3.16V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82A1.65 1.65 0 0 0 20.84 10H21a2 2 0 0 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15z"/></svg>
 </button>
-<script id="reportLocales" type="application/json">{"en":{"aliases":["en"],"publication":"Research report","reportTitle":"Dia Style Report","skipReport":"Skip to report","noScript":"Enable JavaScript in your browser to display and edit this report.","settingsTitle":"Appearance & save","closeSettings":"Close settings","themeLabel":"Theme","fontLabel":"Font","editingLabel":"Allow text editing","saveHtml":"Save HTML","undoEdit":"Undo last text edit","initialStatus":"Save HTML downloads a file containing your changes.","readingTip":"Click text to edit it. Use the bottom-right gear to change the theme or font, or save your edited HTML.","editDescription":"Editable text","editDescriptionSingleLine":"Editable text. Press Enter to finish editing.","savedStatus":"Draft saved in this browser. Save HTML to keep a portable copy.","storageUnavailableStatus":"This browser cannot save drafts. Use Save HTML to keep your changes.","draftUnavailableStatus":"Browser drafts are unavailable. Use Save HTML to keep your changes.","exportedStatus":"Download created. Reopen the downloaded HTML to continue editing.","restoredStatus":"Restored a newer draft from this browser.","undoStatus":"Undid the last text edit.","themes":{"paper":"Paper","white":"White","sage":"Sage","night":"Night"},"fonts":{"editorial":"Editorial · serif headings, sans-serif body","modern":"Modern · sans-serif headings and body","serif":"Serif · serif headings and body"}},"zh-CN":{"aliases":["zh","zh-CN","zh-SG","zh-Hans"],"publication":"研究报告","reportTitle":"Dia 风格报告","skipReport":"跳到报告","noScript":"此报告需要浏览器启用 JavaScript 来显示和编辑文字。","settingsTitle":"外观与保存","closeSettings":"关闭设置","themeLabel":"色调","fontLabel":"字体","editingLabel":"允许编辑文字","saveHtml":"保存 HTML","undoEdit":"撤销上次文字修改","initialStatus":"保存 HTML 会下载包含修改的文件。","readingTip":"点文字即可编辑。右下角可换色调、字体，或保存修改后的 HTML。","editDescription":"可直接编辑文字","editDescriptionSingleLine":"可直接编辑文字，Enter 结束编辑","savedStatus":"草稿已保存在本浏览器。保存 HTML 可带走修改。","storageUnavailableStatus":"浏览器无法保存草稿，请使用“保存 HTML”保留修改。","draftUnavailableStatus":"浏览器草稿不可用，请通过“保存 HTML”保留修改。","exportedStatus":"已生成下载。重新打开下载的 HTML 可继续编辑。","restoredStatus":"已恢复本浏览器中的较新草稿。","undoStatus":"已撤销上次文字修改。","themes":{"paper":"暖纸","white":"素白","sage":"青灰","night":"夜读"},"fonts":{"editorial":"书刊 · 宋体标题，黑体正文","modern":"简洁 · 黑体标题与正文","serif":"宋体 · 标题与正文"}},"ja":{"aliases":["ja"],"publication":"調査レポート","reportTitle":"Dia スタイルレポート","skipReport":"レポートへ移動","noScript":"このレポートを表示・編集するには、ブラウザーの JavaScript を有効にしてください。","settingsTitle":"外観と保存","closeSettings":"設定を閉じる","themeLabel":"色調","fontLabel":"フォント","editingLabel":"文字の編集を許可","saveHtml":"HTML を保存","undoEdit":"直前の文字編集を取り消す","initialStatus":"「HTML を保存」で変更を含むファイルをダウンロードできます。","readingTip":"文章をクリックして編集できます。右下の歯車で色調やフォントを変更し、編集した HTML を保存できます。","editDescription":"直接編集できる文章","editDescriptionSingleLine":"直接編集できる文章。Enter で編集を終了します。","savedStatus":"このブラウザーに下書きを保存しました。「HTML を保存」でファイルとして残せます。","storageUnavailableStatus":"このブラウザーでは下書きを保存できません。「HTML を保存」で変更を残してください。","draftUnavailableStatus":"ブラウザーの下書きを利用できません。「HTML を保存」で変更を残してください。","exportedStatus":"ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。","restoredStatus":"このブラウザーから新しい下書きを復元しました。","undoStatus":"直前の文字編集を取り消しました。","themes":{"paper":"ペーパー","white":"ホワイト","sage":"セージ","night":"夜間"},"fonts":{"editorial":"書籍 · 明朝の見出しとゴシックの本文","modern":"シンプル · 見出しも本文もゴシック","serif":"明朝 · 見出しと本文"}},"zh-TW":{"aliases":["zh-TW","zh-HK","zh-MO","zh-Hant"],"publication":"研究報告","reportTitle":"Dia 風格報告","skipReport":"跳至報告","noScript":"此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。","settingsTitle":"外觀與儲存","closeSettings":"關閉設定","themeLabel":"色調","fontLabel":"字型","editingLabel":"允許編輯文字","saveHtml":"儲存 HTML","undoEdit":"復原上次文字修改","initialStatus":"儲存 HTML 會下載包含修改的檔案。","readingTip":"點選文字即可編輯。右下角可切換色調、字型，或儲存修改後的 HTML。","editDescription":"可直接編輯文字","editDescriptionSingleLine":"可直接編輯文字，按 Enter 結束編輯","savedStatus":"草稿已儲存在本瀏覽器。儲存 HTML 可保留可攜式副本。","storageUnavailableStatus":"瀏覽器無法儲存草稿，請使用「儲存 HTML」保留修改。","draftUnavailableStatus":"瀏覽器草稿無法使用，請透過「儲存 HTML」保留修改。","exportedStatus":"已產生下載。重新開啟下載的 HTML 可繼續編輯。","restoredStatus":"已還原本瀏覽器中較新的草稿。","undoStatus":"已復原上次文字修改。","themes":{"paper":"暖紙","white":"素白","sage":"青灰","night":"夜讀"},"fonts":{"editorial":"書刊 · 襯線標題、無襯線正文","modern":"簡潔 · 無襯線標題與正文","serif":"襯線 · 標題與正文"}}}</script>
+<script id="reportLocales" type="application/json">{"en":{"aliases":["en"],"publication":"Research report","reportTitle":"Dia Style Report","skipReport":"Skip to report","noScript":"Enable JavaScript in your browser to display and edit this report.","settingsTitle":"Appearance & save","closeSettings":"Close settings","themeLabel":"Theme","fontLabel":"Font","editingLabel":"Allow text editing","saveHtml":"Save HTML","undoEdit":"Undo last text edit","initialStatus":"Save HTML downloads a file containing your changes.","readingTip":"Click text to edit it. Use the bottom-right gear to change the theme or font, or save your edited HTML.","editDescription":"Editable text","editDescriptionSingleLine":"Editable text. Press Enter to finish editing.","savedStatus":"Draft saved in this browser. Save HTML to keep a portable copy.","storageUnavailableStatus":"This browser cannot save drafts. Use Save HTML to keep your changes.","draftUnavailableStatus":"Browser drafts are unavailable. Use Save HTML to keep your changes.","exportedStatus":"Download created. Reopen the downloaded HTML to continue editing.","restoredStatus":"Restored a newer draft from this browser.","undoStatus":"Undid the last text edit.","chartBaseline":"Axis starts at {min}, not zero. Bar lengths show differences above this baseline.","chartScrollHint":"Scroll within the chart to read all labels.","chartPointHint":"Hover or focus to read details. Click, Enter or Space pins or closes them; Escape dismisses.","themes":{"paper":"Paper","white":"White","sage":"Sage","night":"Night"},"fonts":{"editorial":"Editorial · serif headings, sans-serif body","modern":"Modern · sans-serif headings and body","serif":"Serif · serif headings and body"}},"zh-CN":{"aliases":["zh","zh-CN","zh-SG","zh-Hans"],"publication":"研究报告","reportTitle":"Dia 风格报告","skipReport":"跳到报告","noScript":"此报告需要浏览器启用 JavaScript 来显示和编辑文字。","settingsTitle":"外观与保存","closeSettings":"关闭设置","themeLabel":"色调","fontLabel":"字体","editingLabel":"允许编辑文字","saveHtml":"保存 HTML","undoEdit":"撤销上次文字修改","initialStatus":"保存 HTML 会下载包含修改的文件。","readingTip":"点文字即可编辑。右下角可换色调、字体，或保存修改后的 HTML。","editDescription":"可直接编辑文字","editDescriptionSingleLine":"可直接编辑文字，Enter 结束编辑","savedStatus":"草稿已保存在本浏览器。保存 HTML 可带走修改。","storageUnavailableStatus":"浏览器无法保存草稿，请使用“保存 HTML”保留修改。","draftUnavailableStatus":"浏览器草稿不可用，请通过“保存 HTML”保留修改。","exportedStatus":"已生成下载。重新打开下载的 HTML 可继续编辑。","restoredStatus":"已恢复本浏览器中的较新草稿。","undoStatus":"已撤销上次文字修改。","chartBaseline":"坐标轴从 {min} 开始，并非零基线；柱长表示高于该起点的差值。","chartScrollHint":"可在图表区域横向滚动，查看完整标签。","chartPointHint":"悬停或聚焦查看明细；点按、Enter 或空格可固定或关闭，Escape 关闭。","themes":{"paper":"暖纸","white":"素白","sage":"青灰","night":"夜读"},"fonts":{"editorial":"书刊 · 宋体标题，黑体正文","modern":"简洁 · 黑体标题与正文","serif":"宋体 · 标题与正文"}},"ja":{"aliases":["ja"],"publication":"調査レポート","reportTitle":"Dia スタイルレポート","skipReport":"レポートへ移動","noScript":"このレポートを表示・編集するには、ブラウザーの JavaScript を有効にしてください。","settingsTitle":"外観と保存","closeSettings":"設定を閉じる","themeLabel":"色調","fontLabel":"フォント","editingLabel":"文字の編集を許可","saveHtml":"HTML を保存","undoEdit":"直前の文字編集を取り消す","initialStatus":"「HTML を保存」で変更を含むファイルをダウンロードできます。","readingTip":"文章をクリックして編集できます。右下の歯車で色調やフォントを変更し、編集した HTML を保存できます。","editDescription":"直接編集できる文章","editDescriptionSingleLine":"直接編集できる文章。Enter で編集を終了します。","savedStatus":"このブラウザーに下書きを保存しました。「HTML を保存」でファイルとして残せます。","storageUnavailableStatus":"このブラウザーでは下書きを保存できません。「HTML を保存」で変更を残してください。","draftUnavailableStatus":"ブラウザーの下書きを利用できません。「HTML を保存」で変更を残してください。","exportedStatus":"ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。","restoredStatus":"このブラウザーから新しい下書きを復元しました。","undoStatus":"直前の文字編集を取り消しました。","chartBaseline":"軸の起点は {min} で、ゼロではありません。棒の長さは起点からの差を示します。","chartScrollHint":"グラフ内を横にスクロールすると、すべてのラベルを確認できます。","chartPointHint":"ホバーまたはフォーカスで詳細を表示。クリック、Enter、スペースで固定・解除、Escape で閉じます。","themes":{"paper":"ペーパー","white":"ホワイト","sage":"セージ","night":"夜間"},"fonts":{"editorial":"書籍 · 明朝の見出しとゴシックの本文","modern":"シンプル · 見出しも本文もゴシック","serif":"明朝 · 見出しと本文"}},"zh-TW":{"aliases":["zh-TW","zh-HK","zh-MO","zh-Hant"],"publication":"研究報告","reportTitle":"Dia 風格報告","skipReport":"跳至報告","noScript":"此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。","settingsTitle":"外觀與儲存","closeSettings":"關閉設定","themeLabel":"色調","fontLabel":"字型","editingLabel":"允許編輯文字","saveHtml":"儲存 HTML","undoEdit":"復原上次文字修改","initialStatus":"儲存 HTML 會下載包含修改的檔案。","readingTip":"點選文字即可編輯。右下角可切換色調、字型，或儲存修改後的 HTML。","editDescription":"可直接編輯文字","editDescriptionSingleLine":"可直接編輯文字，按 Enter 結束編輯","savedStatus":"草稿已儲存在本瀏覽器。儲存 HTML 可保留可攜式副本。","storageUnavailableStatus":"瀏覽器無法儲存草稿，請使用「儲存 HTML」保留修改。","draftUnavailableStatus":"瀏覽器草稿無法使用，請透過「儲存 HTML」保留修改。","exportedStatus":"已產生下載。重新開啟下載的 HTML 可繼續編輯。","restoredStatus":"已還原本瀏覽器中較新的草稿。","undoStatus":"已復原上次文字修改。","chartBaseline":"座標軸從 {min} 開始，並非零基線；柱長表示高於該起點的差值。","chartScrollHint":"可在圖表區域橫向捲動，查看完整標籤。","chartPointHint":"懸停或聚焦查看明細；點按、Enter 或空白鍵可固定或關閉，Escape 關閉。","themes":{"paper":"暖紙","white":"素白","sage":"青灰","night":"夜讀"},"fonts":{"editorial":"書刊 · 襯線標題、無襯線正文","modern":"簡潔 · 無襯線標題與正文","serif":"襯線 · 標題與正文"}}}</script>
 <script id="reportState" type="application/json">{"data":{"version":1,"id":"example-news-20250624-ja","language":"ja","publication":"テクノロジー観察","edition":"過去のニュース · 2025 年 6 月","date":"2025-06-24","title":"変わるのは、インターフェースだけではない","lead":"三つの更新から、見た目、モデルの提供、日常の選択肢の変化を読む。","intro":["ニュースを並べて読むと、個別の記事だけでは見えにくい変化に気づけます。これは 2025 年 6 月の出来事を振り返る構成と表示のサンプルであり、最新ニュースではありません。"],"metrics":[{"value":"3","label":"選んだニュース","note":"この例に含む記事数"},{"value":"06.09-06.24","label":"出来事の日付","note":"2025 年 6 月"},{"value":"3","label":"公式の出典","note":"原文を確認できる入口"}],"sections":[{"title":"I. 注目したい三つの更新","items":[{"title":"Apple · Liquid Glass","tag":"画面デザイン","lead":"新しい視覚素材で、複数のプラットフォームの画面をつなぐ。","paragraphs":["2025 年 6 月 9 日、Apple は半透明の視覚素材 Liquid Glass を紹介し、新しいデザインを iOS 26、iPadOS 26、macOS Tahoe 26、watchOS 26、tvOS 26 に広げました。"],"sources":[{"label":"Apple Newsroom","url":"https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/","date":"2025-06-09"}]},{"title":"Google · Gemini 2.5","tag":"人工知能","lead":"安定版と軽量なプレビュー版で、異なる用途に応える。","paragraphs":["2025 年 6 月 17 日、Google は Gemini 2.5 Pro と Flash の一般提供開始を発表し、Flash-Lite のプレビュー版も公開しました。正式版とプレビュー版は異なる提供段階として区別します。"],"sources":[{"label":"Google 公式ブログ","url":"https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/","date":"2025-06-17"}]},{"title":"Firefox · 140","tag":"ブラウザー","lead":"日常の操作を、利用者自身がより選べるようにする。","paragraphs":["2025 年 6 月 24 日公開の Firefox 140 では、独自の検索エンジンの追加、タブの右クリックメニューからのアンロード、縦型タブの固定領域のサイズ変更に対応しました。"],"sources":[{"label":"Firefox リリースノート","url":"https://www.firefox.com/en-US/firefox/140.0/releasenotes/","date":"2025-06-24"}]}]},{"title":"II. 並べて読む","paragraphs":["編集上の見方：画面、モデル、ブラウザーは別の製品領域ですが、「利用者と道具の関係をどう変えるか」という問いで整理できます。これは読み解くための視点であり、各社が発表した共通戦略ではありません。"]}],"conclusion":{"title":"読み終えたら、一つの主題を残す","paragraphs":["すべての細部を繰り返す必要はありません。何がいつ起きたかを示し、読者が確認できる出典と、さらに考えられる問いを残します。"]},"footerNote":"2026-10-13 に作成した、2025 年 6 月の出来事を振り返るサンプルです。本文は掲載した公式出典の短い要約です。指標はこのサンプルの情報であり、市場統計ではありません。"},"appearance":{"theme":"paper","font":"editorial","editing":true},"revision":"de731315293ac5fc086f189962dfc08e270b21e4742c2a931eb3290da703b201","updatedAt":0}</script>
 <script>
 (() => {
@@ -214,6 +253,191 @@ button:disabled { opacity:.45; cursor:default; }
   const storageKey = 'editorial-report:v1:' + data.id;
   document.documentElement.dataset.uiLanguage=uiLanguage;
   const make = (tag,cls,value) => { const n=document.createElement(tag); if(cls)n.className=cls; if(value!==undefined)n.textContent=value; return n; };
+  const chartViews=[],chartContainers=new Map(),measure=document.createElement('canvas').getContext('2d');
+  const printQuery=window.matchMedia('print');
+  const chartTooltip=make('div','chart-tooltip editor-ui');
+  chartTooltip.id='chartTooltip';chartTooltip.setAttribute('role','tooltip');chartTooltip.hidden=true;chartTooltip.lang=uiLanguage;document.body.append(chartTooltip);
+  let activeChartPoint=null,tooltipTimer,tooltipHovered=false;
+  const chartNumber=new Intl.NumberFormat(reportLanguage,{maximumSignificantDigits:12});
+  const formatChartNumber=value=>chartNumber.format(value);
+  function svgNode(tag,attributes={},value) {
+    const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    for(const [key,val]of Object.entries(attributes))node.setAttribute(key,String(val));
+    if(value!==undefined)node.textContent=value;
+    return node;
+  }
+  function chartAxis(chart) {
+    const highest=chart.points.reduce((max,point)=>Math.max(max,point.value),0);
+    const niceStep=range=>{
+      const raw=range/5;
+      if(!raw)return range;
+      const power=10**Math.floor(Math.log10(raw));
+      if(!power)return raw;
+      const ratio=raw/power;
+      return (ratio<=1?1:ratio<=2?2:ratio<=5?5:10)*power;
+    };
+    let min=0,max=highest||1,step=niceStep(max);
+    if(chart.axis){({min,max}=chart.axis);step=chart.axis.step||niceStep(max-min);}
+    else {const rounded=Math.ceil(max/step)*step;if(Number.isFinite(rounded))max=rounded;}
+    const ticks=[],count=Math.min(100,Math.floor((max-min)/step));
+    for(let i=0;i<=count;i++){const value=Math.min(max,min+i*step);if(ticks.at(-1)!==value)ticks.push(value);}
+    if(ticks.at(-1)!==max)ticks.push(max);
+    return {min,max,ticks};
+  }
+  function hideChartTooltip() {
+    clearTimeout(tooltipTimer);
+    if(activeChartPoint){activeChartPoint.trigger.removeAttribute('aria-describedby');delete activeChartPoint.trigger.dataset.active;}
+    activeChartPoint=null;tooltipHovered=false;chartTooltip.hidden=true;chartTooltip.replaceChildren();
+  }
+  function positionChartTooltip() {
+    if(!activeChartPoint||chartTooltip.hidden)return;
+    const trigger=activeChartPoint.trigger,bar=trigger.querySelector('.chart-bar'),hit=trigger.querySelector('.chart-hit');
+    let bounds=bar.getBoundingClientRect();
+    if(!bounds.width&&!bounds.height)bounds=hit.getBoundingClientRect();
+    const horizontal=activeChartPoint.chart.type==='horizontal-bar';
+    const anchor={x:horizontal?bounds.right:(bounds.left+bounds.right)/2,y:horizontal?(bounds.top+bounds.bottom)/2:bounds.top+8};
+    const size=chartTooltip.getBoundingClientRect(),margin=8,gap=12;
+    let side='right',left=anchor.x+gap;
+    if(left+size.width>innerWidth-margin){side='left';left=anchor.x-gap-size.width;}
+    left=Math.max(margin,Math.min(left,innerWidth-size.width-margin));
+    const top=Math.max(margin,Math.min(anchor.y-24,innerHeight-size.height-margin));
+    chartTooltip.style.left=left+'px';chartTooltip.style.top=top+'px';
+    chartTooltip.dataset.side=side;
+    chartTooltip.style.setProperty('--arrow-y',Math.max(10,Math.min(anchor.y-top,size.height-10))+'px');
+  }
+  function showChartTooltip(trigger,chart,point,pinned=false) {
+    if(printQuery.matches)return;
+    clearTimeout(tooltipTimer);
+    if(activeChartPoint?.trigger!==trigger)hideChartTooltip();
+    activeChartPoint={trigger,chart,point,pinned};trigger.dataset.active='true';
+    const content=make('div','chart-tooltip-content');
+    content.append(make('strong','chart-tooltip-title',point.label));
+    const main=make('p','chart-tooltip-row'),marker=make('span','chart-tooltip-marker');
+    marker.setAttribute('aria-hidden','true');main.append(marker,document.createTextNode(chart.valueLabel+': '+formatChartNumber(point.value)));content.append(main);
+    for(const detail of point.details||[])content.append(make('p','chart-tooltip-row chart-tooltip-detail',detail.label+': '+detail.value));
+    chartTooltip.replaceChildren(content);chartTooltip.hidden=false;trigger.setAttribute('aria-describedby',chartTooltip.id);positionChartTooltip();
+  }
+  function deferChartTooltipClose() {
+    clearTimeout(tooltipTimer);
+    if(!activeChartPoint||activeChartPoint.pinned||document.activeElement===activeChartPoint.trigger)return;
+    tooltipTimer=setTimeout(()=>{if(!tooltipHovered)hideChartTooltip();},180);
+  }
+  function chartPointControl(chart,point,index) {
+    const node=svgNode('g',{'class':'chart-point',tabindex:0,role:'button','data-point-index':index});
+    node.setAttribute('aria-label',[point.label,chart.valueLabel+': '+formatChartNumber(point.value),...(point.details||[]).map(detail=>detail.label+': '+detail.value)].join('. '));
+    node.setAttribute('aria-description',ui.chartPointHint);
+    node.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'&&!activeChartPoint?.pinned)showChartTooltip(node,chart,point);});
+    node.addEventListener('pointerleave',deferChartTooltipClose);
+    node.addEventListener('focus',()=>showChartTooltip(node,chart,point));
+    node.addEventListener('blur',()=>{if(activeChartPoint?.trigger===node&&!activeChartPoint.pinned&&!tooltipHovered&&!node.matches(':hover'))hideChartTooltip();});
+    const toggle=()=>{
+      if(activeChartPoint?.trigger===node&&activeChartPoint.pinned)hideChartTooltip();
+      else showChartTooltip(node,chart,point,true);
+    };
+    node.addEventListener('click',toggle);
+    node.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle();}});
+    return node;
+  }
+  function wrapChartLabel(value,width) {
+    const lines=[];let line='';
+    for(const char of value){
+      if(char==='\n'){lines.push(line);line='';continue;}
+      if(line&&measure.measureText(line+char).width>width){
+        const space=line.lastIndexOf(' ');
+        if(space>0){lines.push(line.slice(0,space));line=line.slice(space+1)+char;}
+        else {lines.push(line);line=char;}
+      }else line+=char;
+    }
+    lines.push(line);return lines;
+  }
+  function chartView(chart,path,id) {
+    const article=make('article','chart-entry'),copy=make('div','chart-copy'),figure=make('figure','chart-figure');
+    const title=editable('h3','chart-title',path+'/title');title.id=id;
+    copy.append(title,editable('p','chart-description',path+'/description',true));
+    const viewport=make('div','chart-viewport'),svg=svgNode('svg',{'class':'chart-svg',role:'group','aria-labelledby':id});
+    viewport.append(svg);figure.append(viewport,editable('figcaption','chart-caption',path+'/caption',true));
+    if(chart.axis?.min>0)figure.append(make('p','chart-baseline',ui.chartBaseline.replace('{min}',formatChartNumber(chart.axis.min))));
+    const hint=make('p','chart-scroll-hint',ui.chartScrollHint);hint.lang=uiLanguage;hint.hidden=true;figure.append(hint);
+    article.append(copy,figure);
+    const view={viewport,svg,chart,hint,lastSize:''};
+    view.draw=()=>{
+      if(!viewport.isConnected)return;
+      // Headless printing keeps the screen viewport; use an A4-sized SVG coordinate space.
+      const available=printQuery.matches?440:Math.max(240,viewport.clientWidth-4),font=getComputedStyle(svg).fontFamily,sizeKey=available+'|'+font;
+      if(view.lastSize===sizeKey)return;
+      view.lastSize=sizeKey;measure.font='12px '+font;
+      const focused=svg.contains(document.activeElement)?Number(document.activeElement.dataset.pointIndex):null;
+      const tip=activeChartPoint?.chart===chart?{index:Number(activeChartPoint.trigger.dataset.pointIndex),pinned:activeChartPoint.pinned}:null;
+      if(tip)hideChartTooltip();
+      svg.replaceChildren();
+      const axis=chartAxis(chart),horizontal=chart.type==='horizontal-bar';
+      let width=available,height,labels,left,right=12,top=12,plotHeight,slot,bottom;
+      if(horizontal){
+        left=Math.min(160,width*.38);labels=chart.points.map(point=>wrapChartLabel(point.label,left-12));
+        slot=Math.max(44,...labels.map(lines=>lines.length*15+14));plotHeight=slot*chart.points.length;height=top+plotHeight+36;
+      }else{
+        labels=chart.points.map(point=>wrapChartLabel(point.label,120));
+        const lines=Math.max(...labels.map(value=>value.length));
+        slot=Math.max(58,(lines*15+4)/Math.sin(Math.PI/10));
+        const labelWidth=Math.max(...labels.flat().map(value=>measure.measureText(value).width));
+        left=Math.max(44,labelWidth*Math.cos(Math.PI/10)-slot/2+6);
+        width=Math.max(width,left+right+slot*chart.points.length);slot=(width-left-right)/chart.points.length;
+        plotHeight=240;bottom=36+labelWidth*Math.sin(Math.PI/10)+(lines-1)*15;height=top+plotHeight+bottom;
+      }
+      const plotWidth=width-left-right,ratio=value=>(value-axis.min)/(axis.max-axis.min);
+      svg.setAttribute('viewBox','0 0 '+width+' '+height);svg.setAttribute('width',width);svg.setAttribute('height',height);svg.style.width=width+'px';
+      const axes=svgNode('g',{'aria-hidden':'true'});svg.append(axes);
+      for(const tick of axis.ticks){
+        if(horizontal){
+          const x=left+ratio(tick)*plotWidth;
+          axes.append(svgNode('line',{'class':'chart-grid',x1:x,x2:x,y1:top,y2:top+plotHeight}));
+          axes.append(svgNode('text',{'class':'chart-axis-text',x,y:top+plotHeight+23,'text-anchor':'middle'},formatChartNumber(tick)));
+        }else{
+          const y=top+(1-ratio(tick))*plotHeight;
+          axes.append(svgNode('line',{'class':'chart-grid',x1:left,x2:width-right,y1:y,y2:y}));
+          axes.append(svgNode('text',{'class':'chart-axis-text',x:left-8,y:y+4,'text-anchor':'end'},formatChartNumber(tick)));
+        }
+      }
+      axes.append(svgNode('line',{'class':'chart-axis',x1:left,x2:horizontal?width-right:left,y1:top+plotHeight,y2:horizontal?top+plotHeight:top}));
+      if(!horizontal)axes.append(svgNode('line',{'class':'chart-axis',x1:left,x2:width-right,y1:top+plotHeight,y2:top+plotHeight}));
+      chart.points.forEach((point,index)=>{
+        const control=chartPointControl(chart,point,index),barClass='chart-bar '+(horizontal?'solid':'outlined')+(point.tone==='muted'?' muted':'');
+        if(horizontal){
+          const center=top+slot*(index+.5),label=svgNode('text',{'class':'chart-axis-text',x:left-10,y:center-(labels[index].length-1)*7.5+4,'text-anchor':'end','aria-hidden':'true'});
+          labels[index].forEach((line,i)=>label.append(svgNode('tspan',{x:left-10,dy:i?15:0},line)));axes.append(label);
+          control.append(svgNode('rect',{'class':barClass,x:left,y:center-14,width:ratio(point.value)*plotWidth,height:28}));
+          control.append(svgNode('rect',{'class':'chart-hit',x:1,y:top+index*slot,width:width-2,height:slot,rx:2}));
+        }else{
+          const center=left+slot*(index+.5),barWidth=slot*.7,barHeight=ratio(point.value)*plotHeight;
+          control.append(svgNode('rect',{'class':barClass,x:center-barWidth/2,y:top+plotHeight-barHeight,width:barWidth,height:barHeight}));
+          control.append(svgNode('rect',{'class':'chart-hit',x:left+slot*index+2,y:top,width:slot-4,height:plotHeight+24,rx:2}));
+          const label=svgNode('text',{'class':'chart-axis-text',transform:'translate('+(center+8)+' '+(top+plotHeight+25)+') rotate(-18)','text-anchor':'end','aria-hidden':'true'});
+          labels[index].forEach((line,i)=>label.append(svgNode('tspan',{x:0,dy:i?15:0},line)));axes.append(label);
+        }
+        svg.append(control);
+      });
+      hint.hidden=width<=available+1;
+      if(focused!==null)svg.querySelector('[data-point-index="'+focused+'"]')?.focus({preventScroll:true});
+      if(tip){const trigger=svg.querySelector('[data-point-index="'+tip.index+'"]');if(trigger)showChartTooltip(trigger,chart,chart.points[tip.index],tip.pinned);}
+    };
+    chartViews.push(view);chartContainers.set(viewport,view);chartObserver?.observe(viewport);return article;
+  }
+  const chartObserver=typeof ResizeObserver==='function'?new ResizeObserver(entries=>{for(const entry of entries)chartContainers.get(entry.target)?.draw();}):null;
+  function refreshCharts() {for(const view of chartViews)view.draw();}
+  chartTooltip.addEventListener('pointerenter',()=>{tooltipHovered=true;clearTimeout(tooltipTimer);});
+  chartTooltip.addEventListener('pointerleave',()=>{tooltipHovered=false;deferChartTooltipClose();});
+  document.addEventListener('pointerdown',event=>{if(activeChartPoint&&!activeChartPoint.trigger.contains(event.target)&&!chartTooltip.contains(event.target))hideChartTooltip();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&activeChartPoint){event.preventDefault();hideChartTooltip();}});
+  window.addEventListener('resize',()=>{refreshCharts();positionChartTooltip();});
+  window.addEventListener('scroll',event=>{
+    if(chartTooltip.contains(event.target))return;
+    if(activeChartPoint&&(activeChartPoint.pinned||document.activeElement===activeChartPoint.trigger))positionChartTooltip();
+    else hideChartTooltip();
+  },true);
+  window.addEventListener('beforeprint',()=>{hideChartTooltip();for(const view of chartViews)view.lastSize='';refreshCharts();});
+  window.addEventListener('afterprint',()=>{for(const view of chartViews)view.lastSize='';refreshCharts();});
+  printQuery.addEventListener('change',()=>{hideChartTooltip();for(const view of chartViews)view.lastSize='';refreshCharts();});
+  document.fonts?.ready.then(()=>{for(const view of chartViews)view.lastSize='';refreshCharts();});
   const read = path => path.split('/').slice(1).reduce((v,key)=>v[key],data);
   const write = (path,value) => { const keys=path.split('/').slice(1), last=keys.pop(); keys.reduce((v,key)=>v[key],data)[last]=value; };
   function editable(tag,cls,path,multiline=false) {
@@ -235,6 +459,7 @@ button:disabled { opacity:.45; cursor:default; }
   }
   function safeURL(value) { try { const u=new URL(value); return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password ? u.href : null; } catch { return null; } }
   function render() {
+    hideChartTooltip();chartObserver?.disconnect();chartViews.length=0;chartContainers.clear();
     root.replaceChildren(); fields.clear(); mirrors.clear();
     const header=make('header','report-header');
     header.append(editable('span','publication','/publication'));
@@ -260,7 +485,9 @@ button:disabled { opacity:.45; cursor:default; }
         if(item.bullets?.length){const ul=make('ul','bullets');item.bullets.forEach((_,k)=>ul.append(editable('li','',q+'/bullets/'+k,true)));body.append(ul);}
         if(item.sources?.length){const sources=make('div','sources');item.sources.forEach(source=>{const href=safeURL(source.url);if(!href)return;const a=make('a','cite','['+(++sourceNumber)+'] '+source.label);a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.title=source.date?source.label+' · '+source.date:source.label;sources.append(a);});body.append(sources);}
         article.append(label,body);items.append(article);
-      });el.append(items);}root.append(el);
+      });el.append(items);}
+      (section.charts||[]).forEach((chart,j)=>el.append(chartView(chart,p+'/charts/'+j,'chart-title-'+i+'-'+j)));
+      root.append(el);
     });
     if(data.conclusion){const conclusion=make('section','conclusion');conclusion.append(editable('h2','','/conclusion/title'));paragraphs(conclusion,data.conclusion.paragraphs,'/conclusion/paragraphs');root.append(conclusion);}
     if(data.footerNote)root.append(editable('p','footer-note','/footerNote',true));
@@ -276,6 +503,7 @@ button:disabled { opacity:.45; cursor:default; }
     document.querySelectorAll('[data-theme-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.themeChoice===appearance.theme)));
     document.querySelectorAll('[data-font-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.fontChoice===appearance.font)));
     document.getElementById('editingToggle').checked=appearance.editing;
+    requestAnimationFrame(refreshCharts);
   }
   function update(path,value) {
     if(!fields.has(path)||typeof value!=='string')return;
@@ -296,15 +524,18 @@ button:disabled { opacity:.45; cursor:default; }
     else {panel.removeAttribute('aria-modal');delete document.documentElement.dataset.sheetOpen;}
   }
   function showPanel(open,restore=false) {
+    if(open)hideChartTooltip();
     panel.hidden=!open;gear.setAttribute('aria-expanded',String(open));
     syncPanelMode();
     if(open){const selected=panel.querySelector('[data-theme-choice][aria-pressed="true"]');selected?.focus();}
     else if(restore)gear.focus();
   }
   function downloadHTML() {
+    hideChartTooltip();
     if(document.activeElement?.dataset.edit)document.activeElement.blur();
     persist();
     const clone=document.documentElement.cloneNode(true);
+    clone.querySelector('.chart-tooltip')?.remove();
     clone.querySelector('#report').replaceChildren();
     clone.querySelector('#themeOptions').replaceChildren(); clone.querySelector('#fontOptions').replaceChildren();
     clone.querySelector('#settingsPanel').hidden=true;clone.querySelector('#settingsBtn').setAttribute('aria-expanded','false');clone.querySelector('#undoEdit').disabled=true;

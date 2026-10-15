@@ -5,6 +5,7 @@ import datetime as dt
 import hashlib
 from html import escape
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -19,6 +20,7 @@ UI_TEXT_KEYS = {
     "undoEdit", "initialStatus", "readingTip", "editDescription",
     "editDescriptionSingleLine", "savedStatus", "storageUnavailableStatus",
     "draftUnavailableStatus", "exportedStatus", "restoredStatus", "undoStatus",
+    "chartBaseline", "chartScrollHint", "chartPointHint",
 }
 
 
@@ -56,6 +58,55 @@ def optional_texts(value, path, keys):
     for key in keys:
         if key in value:
             texts(value[key], f"{path}.{key}")
+
+
+def number(value, path):
+    try:
+        valid = type(value) in (int, float) and math.isfinite(value) and value >= 0
+    except OverflowError:
+        valid = False
+    if not valid:
+        fail(path, "expected a finite nonnegative number")
+    return value
+
+
+def chart(value, path):
+    obj(value, path, {"type", "title", "description", "caption", "valueLabel", "points", "axis"})
+    if value.get("type") not in ("horizontal-bar", "vertical-bar"):
+        fail(f"{path}.type", "expected horizontal-bar or vertical-bar")
+    for key in ("title", "description", "caption", "valueLabel"):
+        text(value.get(key), f"{path}.{key}")
+    points = value.get("points")
+    if not isinstance(points, list) or not points:
+        fail(f"{path}.points", "at least one data point is required")
+    for i, point in enumerate(points):
+        p = f"{path}.points[{i}]"
+        obj(point, p, {"label", "value", "tone", "details"})
+        text(point.get("label"), f"{p}.label")
+        number(point.get("value"), f"{p}.value")
+        if point.get("tone", "primary") not in ("primary", "muted"):
+            fail(f"{p}.tone", "expected primary or muted")
+        details = point.get("details", [])
+        if not isinstance(details, list):
+            fail(f"{p}.details", "expected an array of text label/value pairs")
+        for j, detail in enumerate(details):
+            q = f"{p}.details[{j}]"
+            obj(detail, q, {"label", "value"})
+            for key in ("label", "value"):
+                text(detail.get(key), f"{q}.{key}")
+    if "axis" in value:
+        axis = obj(value["axis"], f"{path}.axis", {"min", "max", "step"})
+        low = number(axis.get("min"), f"{path}.axis.min")
+        high = number(axis.get("max"), f"{path}.axis.max")
+        if high <= low:
+            fail(f"{path}.axis", "max must be greater than min")
+        if "step" in axis:
+            step = number(axis["step"], f"{path}.axis.step")
+            if not step or (high - low) / step > 100 + 1e-8:
+                fail(f"{path}.axis.step", "must be positive and produce no more than 100 intervals")
+        for i, point in enumerate(points):
+            if not low <= point["value"] <= high:
+                fail(f"{path}.points[{i}].value", "outside the explicit axis range")
 
 
 def date(value, path):
@@ -109,7 +160,7 @@ def validate(data):
         fail("sections", "at least one section is required")
     for i, section in enumerate(sections):
         p = f"sections[{i}]"
-        obj(section, p, {"title", "intro", "paragraphs", "items", "table"})
+        obj(section, p, {"title", "intro", "paragraphs", "items", "table", "charts"})
         text(section.get("title"), f"{p}.title")
         if "intro" in section:
             text(section["intro"], f"{p}.intro", required=False)
@@ -153,8 +204,13 @@ def validate(data):
                 texts(row, f"{p}.table.rows[{j}]")
                 if len(row) != len(headers):
                     fail(f"{p}.table.rows[{j}]", "cell count does not match the headers")
-        if not (items or section.get("paragraphs") or table):
-            fail(p, "section requires entries, paragraphs, or a table")
+        charts = section.get("charts", [])
+        if not isinstance(charts, list):
+            fail(f"{p}.charts", "expected an array of charts")
+        for j, value in enumerate(charts):
+            chart(value, f"{p}.charts[{j}]")
+        if not (items or section.get("paragraphs") or table or charts):
+            fail(p, "section requires entries, paragraphs, a table, or charts")
     if "conclusion" in data:
         c = obj(data["conclusion"], "conclusion", {"title", "paragraphs"})
         text(c.get("title"), "conclusion.title")

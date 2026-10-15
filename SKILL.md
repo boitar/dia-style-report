@@ -1,6 +1,6 @@
 ---
 name: dia-style-report
-description: "Create or edit unofficial Dia-inspired, editorial-style single-file HTML reports for news briefs, tool comparisons, research, and reference summaries. Reports support inline text editing, themes, font presets, saving, and English, Simplified Chinese, Japanese, and Traditional Chinese interfaces. Use for report deliverables, not ordinary answers or full websites."
+description: "Create or edit unofficial Dia-inspired, editorial-style single-file HTML reports for news briefs, tool comparisons, research, and reference summaries. Reports support inline text editing, interactive bar charts, themes, saving, and multilingual interfaces. Use for report deliverables, not ordinary answers or full websites."
 ---
 
 # Dia Style Report
@@ -17,6 +17,8 @@ A short question can justify a complete report. Infer a reasonable report type a
 - **Reference summaries**: preserve important relationships, constraints, and terminology; choose components to fit the material.
 
 These are layout criteria, not mandatory chapter templates. Let content determine titles, sections, tables, and metrics. Omit unsupported metrics and do not pad short reports.
+
+When comparable numeric data supports a chart, use `sections[].charts` for horizontal rankings or vertical indicator comparisons. Read the chart contract in the [data specification](references/report-data.md). Keep dimensions and units clear; supplementary text such as cost belongs in each point's tooltip details, not an invented second axis. Do not estimate exact values from a reference image. Label fictional demonstrations explicitly. Point order follows the input; `tone` has no built-in factual meaning.
 
 For changeable claims such as current capabilities, pricing, or news, use available research tools to read direct sources. Match source labels to URLs and state important event dates. Separate facts, vendor claims, and editorial judgments. Without research access, preserve the supplied facts and disclose the scope rather than presenting them as a current verified survey.
 
@@ -58,12 +60,16 @@ Retain appearance with `--theme paper|white|sage|night` and `--font editorial|mo
 
 ## Interactions and delivery
 
-Headings, paragraphs, entries, metrics, and table text are editable. Dates and source links remain reading elements. The bottom-right gear opens appearance and saving controls. Font stacks are local and depend on the device.
+Headings, paragraphs, entries, metrics, table text, and chart titles/descriptions/captions are editable. Change chart points, axes, and tooltip details through the input JSON and regenerate; there is no in-page chart-data editor. Dates and source links remain reading elements. The bottom-right gear opens appearance and saving controls. Font stacks are local and depend on the device.
+
+Charts use inline SVG with no runtime network dependency. Hover or keyboard focus displays point details; click/tap, Enter, or Space pins or closes them, and Escape dismisses. Tooltips remain available when the pointer enters them. Narrow screens stack chart explanations above figures; dense labels scroll within the figure, never the whole page. Nonzero axis baselines are visibly disclosed. Saving HTML preserves charts and edited prose but clears temporary tooltip state. Printing keeps static charts and hides tooltips; tooltip-only details are not printed.
 
 Support desktop and mobile by default: narrow-screen entries are single-column, metrics use at most two columns, tables become labeled rows, and mobile settings use a scrollable bottom sheet. Preserve safe areas, 44px controls, a reachable close button, backdrop dismissal, and browser zoom. Do not simulate mobile layout by shrinking the desktop page.
 
 Drafts use the current browser's available local storage and do not replace disk files. Save HTML downloads a self-contained file with current text, language, theme, and font; reopening it permits further editing. Editing and downloading must remain available when storage is unavailable. Never claim that edits automatically update the original file.
 
 Before delivery, run data validation. When previewing is possible, check the chosen language on desktop, at 320px and 390px, and in landscape. Confirm no horizontal overflow, complete titles and table text, scrollable settings with a visible close button, editing, theme/font changes, and export/reopen behavior. Closing settings must restore report interactions. Report only checks actually completed; viewport simulation is not physical-device or Safari validation.
+
+For reports containing charts, also check keyboard/touch details, tooltip viewport bounds, long labels, and export/reopen with the chart data intact. Use the labeled fictional chart example when demonstrating visual behavior rather than presenting it as a current model or price comparison.
 
 Deliver an openable HTML file, the skill entry point, and one invocation example. Present the report first and state necessary limitations. Keep skill-development notes out of the report itself.

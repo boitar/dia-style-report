@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "id": "example-interactive-charts-zh-CN",
+  "language": "zh-CN",
+  "publication": "图表设计手记",
+  "edition": "虚构数据 · 交互样例",
+  "date": "2026-10-14",
+  "title": "把比较画清楚，把细节留给悬浮",
+  "lead": "先看排名与差距，再指向柱子，展开具体数值。",
+  "intro": [
+    "这是一份图表样式与交互演示，不是实际模型评测。全部对象名称、分数和成本均为虚构；桌面可悬停，手机可点按，键盘可聚焦查看明细。"
+  ],
+  "sections": [
+    {
+      "title": "I. 两种比较，同一种阅读节奏",
+      "charts": [
+        {
+          "type": "horizontal-bar",
+          "title": "1. 综合能力排行",
+          "description": "横向条形图适合顺着名称读排名。深灰与浅灰用于区分两组虚构方案，不代表实际厂商或开源状态。将指针放在条形上，可查看分数与分类。",
+          "caption": "图 1 — 虚构综合得分；按输入顺序排列，浅灰为示例中的本地方案。",
+          "valueLabel": "综合得分",
+          "axis": {"min": 60, "max": 90, "step": 5},
+          "points": [
+            {"label": "Aster XL", "value": 86, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Lumen S", "value": 83.5, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Vela M", "value": 83.4, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Orion R", "value": 82.6, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Cedar X", "value": 82.4, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Mica S", "value": 80.8, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Sprout L", "value": 71.2, "details": [{"label": "分类", "value": "云端方案（虚构）"}]},
+            {"label": "Pebble Local", "value": 68.8, "tone": "muted", "details": [{"label": "分类", "value": "本地方案（虚构）"}]},
+            {"label": "Reed Local", "value": 67, "tone": "muted", "details": [{"label": "分类", "value": "本地方案（虚构）"}]}
+          ]
+        },
+        {
+          "type": "vertical-bar",
+          "title": "2. 指标与单任务成本",
+          "description": "柱高只表达虚构智能指标。成本留在悬浮明细里，不使用第二根坐标轴，避免把不同单位混在一起。点按柱子可以固定提示，再次点按或点击外部关闭。",
+          "caption": "图 2 — 虚构智能指标；悬浮或聚焦查看示例任务成本，金额不代表实际报价。",
+          "valueLabel": "智能指标",
+          "axis": {"min": 30, "max": 60, "step": 5},
+          "points": [
+            {"label": "Aster XL", "value": 57.5, "details": [{"label": "单任务成本", "value": "$5.20（示例）"}]},
+            {"label": "Lumen S", "value": 56, "details": [{"label": "单任务成本", "value": "$7.60（max，示例）"}]},
+            {"label": "Vela M", "value": 53.4, "details": [{"label": "单任务成本", "value": "$2.40（示例）"}]},
+            {"label": "Orion R", "value": 52.5, "details": [{"label": "单任务成本", "value": "$3.80（示例）"}]},
+            {"label": "Cedar X", "value": 52.4, "details": [{"label": "单任务成本", "value": "$3.60（示例）"}]},
+            {"label": "Mica S", "value": 51.6, "details": [{"label": "单任务成本", "value": "$0.72（示例）"}]},
+            {"label": "Sprout L", "value": 34.4, "details": [{"label": "单任务成本", "value": "$0.12（示例）"}]}
+          ]
+        }
+      ]
+    }
+  ],
+  "footerNote": "全部数据仅用于视觉和交互演示，不构成模型排名、采购建议或价格依据。图表采用非零起点来展示局部差异，不能按柱长比较完整数值的倍数关系。修改数据需编辑报告 JSON 并重新生成；图表标题、说明和图注可在此页直接编辑。"
+}

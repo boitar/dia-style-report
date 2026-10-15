@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "id": "example-interactive-charts-en",
+  "language": "en",
+  "publication": "Chart design notes",
+  "edition": "Fictional data · Interactive example",
+  "date": "2026-10-14",
+  "title": "Make comparisons clear. Keep details close.",
+  "lead": "Read the ranking first, then point to a bar for exact values.",
+  "intro": [
+    "This page demonstrates chart styles and interactions, not real model evaluations. All names, scores, and costs are fictional. Hover on desktop, tap on mobile, or focus a bar with the keyboard to read its details."
+  ],
+  "sections": [
+    {
+      "title": "I. Two comparisons, one reading rhythm",
+      "charts": [
+        {
+          "type": "horizontal-bar",
+          "title": "1. Overall ranking",
+          "description": "Horizontal bars make a ranking easy to scan by name. Dark and light gray distinguish two groups of fictional options, not actual vendors or open-source status. Point to a bar for its score and category.",
+          "caption": "Figure 1 — Fictional overall scores in input order. Light gray marks the illustrative local options.",
+          "valueLabel": "Overall score",
+          "axis": {
+            "min": 60,
+            "max": 90,
+            "step": 5
+          },
+          "points": [
+            {
+              "label": "Aster XL",
+              "value": 86,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Lumen S",
+              "value": 83.5,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Vela M",
+              "value": 83.4,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Orion R",
+              "value": 82.6,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Cedar X",
+              "value": 82.4,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Mica S",
+              "value": 80.8,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Sprout L",
+              "value": 71.2,
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Cloud option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Pebble Local",
+              "value": 68.8,
+              "tone": "muted",
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Local option (fictional)"
+                }
+              ]
+            },
+            {
+              "label": "Reed Local",
+              "value": 67,
+              "tone": "muted",
+              "details": [
+                {
+                  "label": "Category",
+                  "value": "Local option (fictional)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "vertical-bar",
+          "title": "2. Indicator and task cost",
+          "description": "Bar height represents one fictional intelligence indicator. Cost appears only in the tooltip; there is no second axis. Click or tap a bar to pin its details, then tap again or click outside to dismiss.",
+          "caption": "Figure 2 — A fictional intelligence indicator. Hover or focus for illustrative task costs, not actual quotes.",
+          "valueLabel": "Intelligence indicator",
+          "axis": {
+            "min": 30,
+            "max": 60,
+            "step": 5
+          },
+          "points": [
+            {
+              "label": "Aster XL",
+              "value": 57.5,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$5.20 (example)"
+                }
+              ]
+            },
+            {
+              "label": "Lumen S",
+              "value": 56,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$7.60 (max, example)"
+                }
+              ]
+            },
+            {
+              "label": "Vela M",
+              "value": 53.4,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$2.40 (example)"
+                }
+              ]
+            },
+            {
+              "label": "Orion R",
+              "value": 52.5,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$3.80 (example)"
+                }
+              ]
+            },
+            {
+              "label": "Cedar X",
+              "value": 52.4,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$3.60 (example)"
+                }
+              ]
+            },
+            {
+              "label": "Mica S",
+              "value": 51.6,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$0.72 (example)"
+                }
+              ]
+            },
+            {
+              "label": "Sprout L",
+              "value": 34.4,
+              "details": [
+                {
+                  "label": "Task cost",
+                  "value": "$0.12 (example)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footerNote": "All data is fictional and demonstrates visual design and interaction only. It is not a model ranking, purchasing recommendation, or price reference. Nonzero baselines highlight local differences; full values cannot be compared by ratios of bar lengths. Change chart data in the report JSON and regenerate. Chart headings, explanations, and captions can be edited directly in this page."
+}
