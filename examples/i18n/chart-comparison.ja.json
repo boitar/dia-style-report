@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "id": "example-interactive-charts-ja",
+  "language": "ja",
+  "publication": "グラフデザインノート",
+  "edition": "架空データ · 操作サンプル",
+  "date": "2026-10-14",
+  "title": "比較は見やすく、詳細はすぐそばに",
+  "lead": "まず順位と差を読み、棒を指して具体的な数値を確認します。",
+  "intro": [
+    "グラフの見た目と操作を示すサンプルであり、実際のモデル評価ではありません。名前、スコア、費用はすべて架空です。PC ではホバー、スマートフォンではタップ、キーボードではフォーカスで詳細を確認できます。"
+  ],
+  "sections": [
+    {
+      "title": "I. 二つの比較、同じ読み進め方",
+      "charts": [
+        {
+          "type": "horizontal-bar",
+          "title": "1. 総合スコアの順位",
+          "description": "横棒グラフでは、名前を追いながら順位を読めます。濃淡のグレーは架空の二つのグループを区別するもので、実際の企業や公開状況を示しません。棒を指すとスコアと分類を確認できます。",
+          "caption": "図 1 — 架空の総合スコアを入力順で表示。薄いグレーはサンプルのローカル方式です。",
+          "valueLabel": "総合スコア",
+          "axis": {
+            "min": 60,
+            "max": 90,
+            "step": 5
+          },
+          "points": [
+            {
+              "label": "Aster XL",
+              "value": 86,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Lumen S",
+              "value": 83.5,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Vela M",
+              "value": 83.4,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Orion R",
+              "value": 82.6,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Cedar X",
+              "value": 82.4,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Mica S",
+              "value": 80.8,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Sprout L",
+              "value": 71.2,
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "クラウド方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Pebble Local",
+              "value": 68.8,
+              "tone": "muted",
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "ローカル方式（架空）"
+                }
+              ]
+            },
+            {
+              "label": "Reed Local",
+              "value": 67,
+              "tone": "muted",
+              "details": [
+                {
+                  "label": "分類",
+                  "value": "ローカル方式（架空）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "vertical-bar",
+          "title": "2. 指標とタスク単価",
+          "description": "棒の高さは架空の知能指標だけを表します。費用は詳細表示に置き、第 2 軸は使いません。棒をクリックまたはタップすると表示を固定し、もう一度タップするか外側を押すと閉じます。",
+          "caption": "図 2 — 架空の知能指標。ホバーやフォーカスでタスク単価の例を表示します。実際の価格ではありません。",
+          "valueLabel": "知能指標",
+          "axis": {
+            "min": 30,
+            "max": 60,
+            "step": 5
+          },
+          "points": [
+            {
+              "label": "Aster XL",
+              "value": 57.5,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$5.20（例）"
+                }
+              ]
+            },
+            {
+              "label": "Lumen S",
+              "value": 56,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$7.60（max、例）"
+                }
+              ]
+            },
+            {
+              "label": "Vela M",
+              "value": 53.4,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$2.40（例）"
+                }
+              ]
+            },
+            {
+              "label": "Orion R",
+              "value": 52.5,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$3.80（例）"
+                }
+              ]
+            },
+            {
+              "label": "Cedar X",
+              "value": 52.4,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$3.60（例）"
+                }
+              ]
+            },
+            {
+              "label": "Mica S",
+              "value": 51.6,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$0.72（例）"
+                }
+              ]
+            },
+            {
+              "label": "Sprout L",
+              "value": 34.4,
+              "details": [
+                {
+                  "label": "タスク単価",
+                  "value": "$0.12（例）"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footerNote": "すべてのデータは見た目と操作を示すための架空の例です。実際のモデル順位、購入の助言、価格の根拠ではありません。軸はゼロ以外から始まり、局所的な差を示します。棒の長さの比率で数値全体の倍率を比較することはできません。数値の変更はレポート JSON を編集して再生成してください。見出し、説明、キャプションはこのページで直接編集できます。"
+}

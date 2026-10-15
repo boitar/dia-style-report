@@ -11,6 +11,7 @@ This unofficial design was reimplemented from the user's single-file Dia technol
 - Body text is explicitly 16px with line-height 1.75. Introductory text is 17px; notes are at least 12px.
 - A metrics strip distributes 1-4 actual metrics evenly and uses at most two columns on narrow screens. Omit it when the content has no reliable numbers.
 - Tables compare genuine dimensions. On narrow screens, rows become labeled entries without dropping any text.
+- Chart entries use one-third explanation and two-thirds figure with a 24px gap, within the unchanged report width. Horizontal rankings use solid dark/light gray bars; vertical indicators use light fill, gray outlines, fine gridlines, and angled labels. There are no chart cards or additional page chrome.
 - Report content uses square corners, fine rules, and whitespace. The gear and settings panel are controls, so modest rounding and depth are appropriate.
 
 ## Presets
@@ -46,6 +47,18 @@ Mobile settings use a bottom sheet with a persistent 44px close button and an in
 
 Each text block is independently editable. Paste inserts plain text and preserves structure and source links. Paragraphs may contain line breaks; Enter ends single-line heading edits. Text and panel controls are keyboard-focusable.
 
+### Chart interactions
+
+Chart figures use inline SVG, with at least 12px axis/point labels and local font stacks. CSS semantic colors follow the existing themes; a muted bar is a visual category, not an automatic claim about availability or licensing. Titles/descriptions/captions are editable text, but numerical configuration remains in JSON.
+
+Desktop explanations stay beside the figure; at 620px and below, they appear above it. Horizontal labels wrap, with taller rows when needed. Angled vertical labels wrap and reserve enough spacing; dense figures grow internally and scroll within their own viewport. Do not shrink the document or create page-level horizontal overflow. Full labels and details remain available through each point's accessible name.
+
+The charcoal, white-text tooltip has a small side arrow and viewport-clamped placement. Hover and focus display it; entering the tooltip cancels deferred pointer dismissal. Click/tap, Enter, or Space toggles pinning; outside pointer-down and Escape dismiss. Escape leaves focus on the point. Pinned or keyboard-focused tooltips reposition during scrolling, and long tooltip content scrolls internally. Opening settings dismisses the tooltip and retains the existing mobile focus/scroll isolation.
+
+Each data point is focusable even when text editing is disabled, with a visible keyboard focus indicator. Zero values retain an interactive hit area. Explicit nonzero minima produce a localized note adjacent to the caption. Export removes transient tooltip DOM and rebuilds charts from the saved state.
+
 Drafts are isolated by report ID and content revision. Keep the existing `editorial-report:v1:` storage namespace for compatibility. Export a structured snapshot of current text and appearance, clear temporary editing DOM and background locks, and rebuild from the snapshot on reopen. An older browser draft must not overwrite a newer exported snapshot. The locale catalog is embedded too, so exported reports remain editable offline.
 
 Printing hides controls and edit outlines. Section headings stay with following content, and entries should avoid splitting when practical; long sections may paginate normally. Night mode prints with a white background and dark text. Actual background printing still depends on browser settings.
+
+Printing also hides chart tooltips and scroll hints while retaining SVG figures, captions, and baseline notices. Chart entries avoid page breaks when practical; unusually large datasets/labels can exceed one printable page. Tooltip-only details remain an HTML reading feature, not a PDF data export.

@@ -39,12 +39,52 @@ Every section requires a `title` and at least one content form:
 - `paragraphs`: a string array for continuous analysis.
 - `items`: an entry array for categorized points, news, or tool descriptions.
 - `table`: `{caption?, headers: [column names], rows: [[cell text]]}`. Use 2-6 columns; every row must match the header count.
+- `charts`: an array of the bar-chart objects described below.
 
 These forms can be combined. A section may also have an optional `intro` string.
 
 Each entry requires `title` and at least one of `lead`, `paragraphs`, or `bullets`. `lead` is an emphasized main point; the latter two are string arrays. An optional `tag` labels a category.
 
 Entries may include `sources`, an array of `{label, url, date?}`. A URL must be a direct HTTP/HTTPS source link without embedded credentials. An optional date must be a valid calendar date. Providing a link is not fact-checking: read the source and confirm that it supports the claim.
+
+## Interactive bar charts
+
+A chart can be the section's only content. Charts appear after any section prose, table, and entries. They are self-contained SVG figures; the generated HTML does not fetch a library or data.
+
+| Field | Constraint / purpose |
+| --- | --- |
+| `type` | Required `horizontal-bar` or `vertical-bar` |
+| `title` | Required plain-text heading, editable in the HTML |
+| `description` | Required plain-text explanation, editable in the HTML |
+| `caption` | Required plain-text figure caption, editable in the HTML |
+| `valueLabel` | Required name/unit of the plotted numeric dimension |
+| `points` | Required nonempty array, displayed in input order |
+| `axis` | Optional `{min, max, step?}`; bounds required when this object is present |
+
+Each point requires `label` (its full, nonempty name) and `value` (a finite, nonnegative JSON number, not a boolean or numeric string). Optional `tone` is `primary` (default) or `muted`; it changes the gray treatment, not the data's meaning. Explain any grouping in the prose/caption. Optional `details` is an array of nonempty plain-text `{label, value}` pairs; values such as `"$1.20 (illustrative)"` are text, not another plotted series.
+
+Without `axis`, the axis starts at zero and uses automatic upper bounds/ticks. An all-zero dataset uses a 0-1 axis so it remains readable. Explicit bounds must be finite and nonnegative, `max > min`, and contain every point, including values exactly at either boundary. Optional `step` must be finite and positive, producing no more than 100 intervals. Data outside explicit bounds is rejected rather than clipped. A nonzero minimum always produces a localized baseline notice; bar length then represents only the difference above that minimum.
+
+```json
+{
+  "title": "I. Compare illustrative options",
+  "charts": [
+    {
+      "type": "vertical-bar",
+      "title": "An illustrative indicator",
+      "description": "Fictional data; hover, tap, or focus a bar for details.",
+      "caption": "Not a real product evaluation or quote.",
+      "valueLabel": "Score",
+      "points": [
+        {"label": "Option A", "value": 56, "details": [{"label": "Task cost", "value": "$1.20 (example)"}]},
+        {"label": "Option B", "value": 52, "tone": "muted"}
+      ]
+    }
+  ]
+}
+```
+
+Update point labels, numbers, details, or axes in JSON and regenerate; they are not inline-editable. Titles, descriptions, and captions use the existing draft/undo/export behavior. Saved HTML embeds all chart data and rebuilds interactive figures on reopen. Printing keeps the static figure and baseline notice, but hides overlays; tooltip-only details are not included in the printed chart.
 
 ## Minimal complete example
 

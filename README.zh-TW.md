@@ -40,6 +40,7 @@
 
 - **整理內容**：適合新聞簡報、工具選型、主題研究和資料歸納，先給結論，再展開依據與細節。
 - **按內容選擇版型**：支援段落、分類項目、清單、比較表、來源連結，以及有可靠資料時使用的指標列。
+- **互動式圖表**：橫向排名長條圖與描邊直向長條圖，支援懸停、手機點按及鍵盤查看明細；資料由 JSON 產生，不提供網頁內資料編輯面板。
 - **直接編輯報告**：點選正文即可改字，可復原上一次文字修改；瀏覽器草稿與磁碟檔案是兩回事。
 - **調整外觀**：提供暖紙、素白、青灰、夜讀四種色調，以及書刊、簡潔、襯線三組字型預設。
 - **閱讀與帶走**：適配桌面和手機，儲存為包含目前文字與外觀的 HTML，重新開啟後可繼續編輯。
@@ -79,6 +80,36 @@ skill 負責提供內容組織規則、範本和產生腳本，**不是獨立的
 範例：[HTML 成品](examples/i18n/report-comparison.zh-TW.html) · [JSON 資料](examples/i18n/report-comparison.zh-TW.json)
 
 截圖使用 Chromium 核心瀏覽器產生；手機圖為 390px 檢視區模擬，不等同於實際手機或 Safari 驗證。系統字型會隨裝置而變。
+
+### 互動式長條圖
+
+桌面採用左側說明、右側圖表；手機改為上下排列。懸停或聚焦可展開深色提示框；點按、Enter 或空白鍵可固定或關閉，Escape 或點選外部可關閉。密集標籤只在圖表區域橫向捲動，不撐寬整頁。
+
+![繁體中文報告中的橫向排行與描邊直向長條圖](docs/images/zh-TW/chart-comparison-desktop.png)
+
+將指標移到長條上，即可顯示對象名稱、精確指標及附加的任務成本，不需增加第二條座標軸：
+
+![繁體中文提示框顯示指標與虛構單任務成本](docs/images/zh-TW/chart-comparison-hover.png)
+
+<details>
+<summary>查看手機效果：點按顯示明細，只在圖表內橫向捲動</summary>
+
+<img src="docs/images/zh-TW/chart-comparison-mobile.png" alt="390px 手機檢視區模擬下的繁體中文圖表與固定明細" width="390">
+
+這是 390px 檢視區模擬，不等同於實際手機或 Safari 驗證。
+
+</details>
+
+範例：[互動 HTML](examples/i18n/chart-comparison.zh-TW.html) · [JSON 資料](examples/i18n/chart-comparison.zh-TW.json)。**全部名稱、分數及成本均為虛構，不是已核驗的模型排名或價格。** README 圖片是靜態截圖；請在本機開啟 HTML 體驗互動。
+
+```bash
+python3 scripts/render_report.py \
+  --input examples/i18n/chart-comparison.zh-TW.json \
+  --output output/chart-comparison.zh-TW.html \
+  --theme white --font modern
+```
+
+數值及明細需修改 JSON 後重新產生；標題、說明及圖說可直接編輯。非零起點會明確提示。儲存 HTML 保留完整離線互動；列印保留靜態圖表，不包含僅在提示框中顯示的明細。
 
 ## 怎麼使用
 
@@ -172,14 +203,14 @@ python3 scripts/render_report.py \
 | 繁體中文 | [README.zh-TW.md](README.zh-TW.md) | 目前版本 |
 | 日本語 | [README.ja.md](README.ja.md) | 日文版本 |
 
-每種語言均提供新聞簡報、比較報告和對應 JSON。請下載 HTML 或在本機開啟；GitHub 顯示的是 HTML 原始碼，不會直接執行報告。`examples/` 根目錄為預設英文版。
+每種語言均提供新聞簡報、比較報告、互動圖表範例和對應 JSON。請下載 HTML 或在本機開啟；GitHub 顯示的是 HTML 原始碼，不會直接執行報告。英文範例使用不帶語言後綴的檔名。
 
-| 報告語言 | 新聞簡報 | 比較報告 |
-| --- | --- | --- |
-| English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) |
-| 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) |
-| 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) |
-| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
+| 報告語言 | 新聞簡報 | 比較報告 | 互動圖表 |
+| --- | --- | --- | --- |
+| English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) | [HTML](examples/chart-comparison.html) · [JSON](examples/chart-comparison.json) |
+| 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) | [HTML](examples/chart-comparison.zh-CN.html) · [JSON](examples/chart-comparison.zh-CN.json) |
+| 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) | [HTML](examples/i18n/chart-comparison.zh-TW.html) · [JSON](examples/i18n/chart-comparison.zh-TW.json) |
+| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) | [HTML](examples/i18n/chart-comparison.ja.html) · [JSON](examples/i18n/chart-comparison.ja.json) |
 
 ## 儲存庫內容
 
@@ -193,7 +224,7 @@ python3 scripts/render_report.py \
 | [agents/openai.yaml](agents/openai.yaml) | 顯示名稱與預設呼叫提示 |
 | [examples/](examples/) | 可重現的範例資料與 HTML 成品 |
 | [docs/images/](docs/images/) | 實際頁面截圖與 README 頭部素材 |
-| [tests/](tests/) | 產生器、語言、跳脫與範例回歸測試 (`python3 -m unittest discover -s tests -v`) |
+| [tests/](tests/) | 既有產生器與介面語言回歸測試 |
 
 ## 開源與授權說明
 

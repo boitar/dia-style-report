@@ -40,6 +40,7 @@
 
 - **内容の整理**：ニュースの要約、ツール比較、テーマ調査、資料の整理に適しています。まず結論を示し、その後に根拠と詳細を説明します。
 - **内容に合わせた構成**：段落、分類した項目、リスト、比較表、出典リンクを使えます。信頼できる数値がある場合は指標欄も使えます。
+- **インタラクティブなグラフ**：横向きのランキングと輪郭付き縦棒グラフに対応。ホバー、タップ、キーボードで詳細を表示します。データは JSON から生成し、ページ内のデータ編集画面はありません。
 - **レポートの直接編集**：本文をクリックして修正し、直前の文字編集を取り消せます。ブラウザー内の下書きと保存したファイルは別のものです。
 - **外観の変更**：ペーパー・ホワイト・セージ・夜間の 4 色調と、書籍・シンプル・明朝の 3 種類のフォント設定を用意しています。
 - **閲覧と持ち出し**：PC とスマートフォンに対応。現在の文章と外観を含む HTML を保存し、開き直して編集を続けられます。
@@ -79,6 +80,36 @@ skill が提供するのは、内容を整理するための指示、テンプ�
 サンプル：[生成した HTML](examples/i18n/report-comparison.ja.html) · [JSON データ](examples/i18n/report-comparison.ja.json)
 
 スクリーンショットは Chromium 系ブラウザーで撮影しました。スマートフォン用画像は幅 390px の表示領域を模擬したもので、実機や Safari での検証ではありません。実際の字体は端末のシステムフォントによって変わります。
+
+### インタラクティブな棒グラフ
+
+PC では説明を左、グラフを右に配置し、スマートフォンでは縦に並べます。ホバーやフォーカスで暗い詳細表示が開きます。クリック／タップ、Enter、スペースで固定・解除し、Escape または外側のタップで閉じます。ラベルが多い場合はグラフ内だけを横スクロールできます。
+
+![日本語レポートの横棒ランキングと輪郭付き縦棒グラフ](docs/images/ja/chart-comparison-desktop.png)
+
+棒を指すと、名前、正確な指標、補足のタスク単価を確認できます。第 2 軸は使いません。
+
+![架空の指標とタスク単価を表示する日本語のツールチップ](docs/images/ja/chart-comparison-hover.png)
+
+<details>
+<summary>スマートフォン表示：タップで詳細、横スクロールはグラフ内だけ</summary>
+
+<img src="docs/images/ja/chart-comparison-mobile.png" alt="幅 390px の模擬スマートフォン画面で日本語の詳細表示を固定したグラフ" width="390">
+
+幅 390px の表示領域を模擬したもので、実機や Safari での検証ではありません。
+
+</details>
+
+サンプル：[操作できる HTML](examples/i18n/chart-comparison.ja.html) · [JSON データ](examples/i18n/chart-comparison.ja.json)。**名前・スコア・費用のすべてが架空**であり、実際のモデル評価や価格ではありません。README の画像は静止画です。操作は HTML をローカルで開いてお試しください。
+
+```bash
+python3 scripts/render_report.py \
+  --input examples/i18n/chart-comparison.ja.json \
+  --output output/chart-comparison.ja.html \
+  --theme white --font modern
+```
+
+数値と詳細は JSON を変更して再生成し、見出し・説明・図のキャプションはそのまま編集できます。ゼロ以外の軸起点は明示します。保存した HTML はオフラインでも操作できます。印刷には静的な図が残りますが、ツールチップだけの詳細は含まれません。
 
 ## 使い方
 
@@ -173,14 +204,14 @@ python3 scripts/render_report.py \
 | 繁體中文 | [README.zh-TW.md](README.zh-TW.md) | 繁体字中国語版 |
 | 日本語 | [README.ja.md](README.ja.md) | この言語版 |
 
-各言語にニュースの要約、比較レポート、対応する JSON を用意しています。HTML はダウンロードするかローカルで開いてください。GitHub では HTML のソースが表示され、レポートは実行されません。`examples/` 直下は既定の英語版です。
+各言語にニュースの要約、比較レポート、操作できるグラフ、対応する JSON を用意しています。HTML はダウンロードするかローカルで開いてください。GitHub では HTML のソースが表示され、レポートは実行されません。英語のサンプルは言語の接尾辞がないファイル名です。
 
-| レポートの言語 | ニュースの要約 | 比較レポート |
-| --- | --- | --- |
-| English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) |
-| 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) |
-| 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) |
-| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) |
+| レポートの言語 | ニュースの要約 | 比較レポート | 操作できるグラフ |
+| --- | --- | --- | --- |
+| English | [HTML](examples/news-brief.html) · [JSON](examples/news-brief.json) | [HTML](examples/report-comparison.html) · [JSON](examples/report-comparison.json) | [HTML](examples/chart-comparison.html) · [JSON](examples/chart-comparison.json) |
+| 简体中文 | [HTML](examples/i18n/news-brief.zh-CN.html) · [JSON](examples/i18n/news-brief.zh-CN.json) | [HTML](examples/i18n/report-comparison.zh-CN.html) · [JSON](examples/i18n/report-comparison.zh-CN.json) | [HTML](examples/chart-comparison.zh-CN.html) · [JSON](examples/chart-comparison.zh-CN.json) |
+| 繁體中文 | [HTML](examples/i18n/news-brief.zh-TW.html) · [JSON](examples/i18n/news-brief.zh-TW.json) | [HTML](examples/i18n/report-comparison.zh-TW.html) · [JSON](examples/i18n/report-comparison.zh-TW.json) | [HTML](examples/i18n/chart-comparison.zh-TW.html) · [JSON](examples/i18n/chart-comparison.zh-TW.json) |
+| 日本語 | [HTML](examples/i18n/news-brief.ja.html) · [JSON](examples/i18n/news-brief.ja.json) | [HTML](examples/i18n/report-comparison.ja.html) · [JSON](examples/i18n/report-comparison.ja.json) | [HTML](examples/i18n/chart-comparison.ja.html) · [JSON](examples/i18n/chart-comparison.ja.json) |
 
 ## リポジトリの内容
 
@@ -194,7 +225,7 @@ python3 scripts/render_report.py \
 | [agents/openai.yaml](agents/openai.yaml) | 表示名と既定の呼び出し例 |
 | [examples/](examples/) | 再現できるサンプルデータと生成済み HTML |
 | [docs/images/](docs/images/) | 実際のページの画像と README のヘッダー素材 |
-| [tests/](tests/) | 生成、言語、エスケープ、サンプルの回帰テスト (`python3 -m unittest discover -s tests -v`) |
+| [tests/](tests/) | 既存の生成処理・画面言語の回帰テスト |
 
 ## オープンソースとライセンスの状況
 
