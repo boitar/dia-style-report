@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 UI_LANGUAGES = ("en", "zh-CN", "ja", "zh-TW")
 UI_TEXT_KEYS = {
     "publication", "reportTitle", "skipReport", "noScript", "settingsTitle",
-    "closeSettings", "themeLabel", "fontLabel", "editingLabel", "saveHtml",
+    "closeSettings", "themeLabel", "fontLabel", "badgeTiltLabel", "editingLabel", "saveHtml",
     "undoEdit", "initialStatus", "readingTip", "editDescription",
     "editDescriptionSingleLine", "savedStatus", "storageUnavailableStatus",
     "draftUnavailableStatus", "exportedStatus", "restoredStatus", "undoStatus",
@@ -262,6 +262,7 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--theme", choices=("paper", "white", "sage", "night"), default="paper")
     parser.add_argument("--font", choices=("editorial", "modern", "serif"), default="editorial")
+    parser.add_argument("--badge-tilt", choices=("on", "off"), default="on", help="slightly rotate single-line category labels (default: on)")
     parser.add_argument("--language", choices=UI_LANGUAGES, help="override report/editor language; does not translate supplied text")
     parser.add_argument("--force", action="store_true", help="allow replacing the specified output file")
     args = parser.parse_args()
@@ -276,7 +277,7 @@ def main():
         digest = hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
         data.setdefault("id", f"report-{digest[:16]}")
         data.setdefault("publication", ui["publication"])
-        state = {"data": data, "appearance": {"theme": args.theme, "font": args.font, "editing": True}, "revision": digest, "updatedAt": 0}
+        state = {"data": data, "appearance": {"theme": args.theme, "font": args.font, "badgeTilt": args.badge_tilt == "on", "editing": True}, "revision": digest, "updatedAt": 0}
         template = (directory / "assets" / "report-template.html").read_text(encoding="utf-8")
         for marker in ("__REPORT_STATE_JSON__", "__REPORT_LOCALES_JSON__"):
             if template.count(marker) != 1:
