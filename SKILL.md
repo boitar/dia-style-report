@@ -56,19 +56,23 @@ Reuse `assets/report-template.html` instead of rebuilding CSS for each report. U
 
 Read the existing HTML's `script#reportState` first. Preserve current text, sources, ID, language, and appearance before applying the requested changes. An exported HTML snapshot already contains browser edits; do not overwrite those edits with stale JSON.
 
-Retain appearance with `--theme paper|white|sage|night` and `--font editorial|modern|serif`. Use `--force` only to replace a file the user explicitly asked to modify. Avoid overwriting names when creating new reports.
+Retain appearance with `--theme paper|white|sage|night`, `--font editorial|modern|serif`, and `--badge-tilt on|off` (default `on`). Map an existing `appearance.badgeTilt: false` to `--badge-tilt off`; a missing field defaults to enabled. Use `--force` only to replace a file the user explicitly asked to modify. Avoid overwriting names when creating new reports.
 
 ## Interactions and delivery
 
 Headings, paragraphs, entries, metrics, table text, and chart titles/descriptions/captions are editable. Change chart points, axes, and tooltip details through the input JSON and regenerate; there is no in-page chart-data editor. Dates and source links remain reading elements. The bottom-right gear opens appearance and saving controls. Font stacks are local and depend on the device.
 
+Category labels use fine outlines and a stable subtle tilt by default. The gear menu can turn label tilt off without changing content. Title and label share a line when they fit; long labels wrap fully and stay horizontal. Editing text, undo, and appearance changes do not reassign angles. Drafts, saved HTML, and printing retain the toggle. Existing HTML needs regeneration with the current template to gain this feature; first preserve its current data and appearance.
+
 Charts use inline SVG with no runtime network dependency. Hover or keyboard focus displays point details; click/tap, Enter, or Space pins or closes them, and Escape dismisses. Tooltips remain available when the pointer enters them. Narrow screens stack chart explanations above figures; dense labels scroll within the figure, never the whole page. Nonzero axis baselines are visibly disclosed. Saving HTML preserves charts and edited prose but clears temporary tooltip state. Printing keeps static charts and hides tooltips; tooltip-only details are not printed.
 
 Support desktop and mobile by default: narrow-screen entries are single-column, metrics use at most two columns, tables become labeled rows, and mobile settings use a scrollable bottom sheet. Preserve safe areas, 44px controls, a reachable close button, backdrop dismissal, and browser zoom. Do not simulate mobile layout by shrinking the desktop page.
 
-Drafts use the current browser's available local storage and do not replace disk files. Save HTML downloads a self-contained file with current text, language, theme, and font; reopening it permits further editing. Editing and downloading must remain available when storage is unavailable. Never claim that edits automatically update the original file.
+Drafts use the current browser's available local storage and do not replace disk files. Save HTML downloads a self-contained file with current text, language, theme, font, and label-tilt setting; reopening it permits further editing. Editing and downloading must remain available when storage is unavailable. Never claim that edits automatically update the original file.
 
 Before delivery, run data validation. When previewing is possible, check the chosen language on desktop, at 320px and 390px, and in landscape. Confirm no horizontal overflow, complete titles and table text, scrollable settings with a visible close button, editing, theme/font changes, and export/reopen behavior. Closing settings must restore report interactions. Report only checks actually completed; viewport simulation is not physical-device or Safari validation.
+
+For reports containing category labels, also check the tilt toggle, stable angles after editing/export, and horizontal full-text wrapping for long labels.
 
 For reports containing charts, also check keyboard/touch details, tooltip viewport bounds, long labels, and export/reopen with the chart data intact. Use the labeled fictional chart example when demonstrating visual behavior rather than presenting it as a current model or price comparison.
 

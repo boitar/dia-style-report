@@ -45,6 +45,8 @@ These forms can be combined. A section may also have an optional `intro` string.
 
 Each entry requires `title` and at least one of `lead`, `paragraphs`, or `bullets`. `lead` is an emphasized main point; the latter two are string arrays. An optional `tag` labels a category.
 
+Category labels use fine outlines with stable subtle tilt by default. Title and tag share a line when they fit; a tag that needs multiple lines keeps all its text and stays horizontal. Use the gear menu's label-tilt checkbox or CLI `--badge-tilt on|off` (default `on`) to control this appearance. No new entry/content fields are needed.
+
 Entries may include `sources`, an array of `{label, url, date?}`. A URL must be a direct HTTP/HTTPS source link without embedded credentials. An optional date must be a valid calendar date. Providing a link is not fact-checking: read the source and confirm that it supports the claim.
 
 ## Interactive bar charts
@@ -116,7 +118,11 @@ Update point labels, numbers, details, or axes in JSON and regenerate; they are 
 
 ## Editing exported reports
 
-The HTML's `script#reportState` contains `{data, appearance, revision, updatedAt}`. Extract and edit `data`, then render it again. Preserve the ID, language, source links, and appearance. Pass the existing theme and font through the CLI to retain them.
+The HTML's `script#reportState` contains `{data, appearance, revision, updatedAt}`. Extract and edit `data`, then render it again. Preserve the ID, language, source links, and appearance. Pass the existing theme, font, and label-tilt setting through the CLI to retain them.
+
+`appearance` contains `theme`, `font`, `editing`, and `badgeTilt`. The new `badgeTilt` field is a boolean, defaults to `true`, and also defaults to enabled when absent from an older state. Pass `--badge-tilt off` for `false` and `--badge-tilt on` for `true` when regenerating. Text-editing availability remains an in-page control. Browser drafts and Save HTML retain the label-tilt selection; exporting still works when local storage is unavailable. Printing follows that selection. Existing HTML does not gain the control automatically.
+
+Angles are derived from the preserved report ID and item path, not tag text, and do not change during inline edits or export/reopen. JSON reordering assigns them by the new positions. If the ID is omitted when regenerating changed JSON, a newly generated ID can change the angles too.
 
 The renderer recomputes the revision to keep stale drafts from replacing newer content. Explicit language overrides are included in that revision. Existing report IDs and the `editorial-report:v1:` browser storage namespace are retained.
 

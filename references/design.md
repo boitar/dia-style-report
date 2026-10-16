@@ -8,6 +8,7 @@ This unofficial design was reimplemented from the user's single-file Dia technol
 - A compact publication header leads into a conclusion-first introduction. The serif headline uses weight 500 and a responsive 34-52px size.
 - Section headings are 21px with a 2px ink-colored rule. Entries are separated by light 1px rules.
 - Entries use a 170px label column, a 24px gap, and the remaining width for explanations. At 620px and below, they become single-column.
+- Entry titles and category labels use a wrapping baseline-aligned row within that column. Labels have a paper-colored background, 1px muted outline, slightly rounded corners, and .08em letter spacing. Rotation applies to the entire label, never just the text.
 - Body text is explicitly 16px with line-height 1.75. Introductory text is 17px; notes are at least 12px.
 - A metrics strip distributes 1-4 actual metrics evenly and uses at most two columns on narrow screens. Omit it when the content has no reliable numbers.
 - Tables compare genuine dimensions. On narrow screens, rows become labeled entries without dropping any text.
@@ -46,6 +47,16 @@ At 620px and below, use single-column content, 30-38px headlines, 16px body and 
 Mobile settings use a bottom sheet with a persistent 44px close button and an independently scrollable content area. Short landscape screens use the same sheet. Theme, font, editing, and saving controls are at least 44px, with 8px between theme buttons. Opening the sheet locks background scrolling and focus; closing it or clicking the backdrop restores the report. Escape closes it and returns focus to the gear. Desktop uses the bottom-right popover.
 
 Each text block is independently editable. Paste inserts plain text and preserves structure and source links. Paragraphs may contain line breaks; Enter ends single-line heading edits. Text and panel controls are keyboard-focusable.
+
+### Category label tilt
+
+The native checkbox after the font choices controls `appearance.badgeTilt`, enabled by default. Disabling it makes all category labels horizontal; enabling it restores their assigned angles. It has no rotation animation and does not affect headings, prose, tables, or chart labels.
+
+Angles use 32-bit FNV-1a over the ASCII string `report ID + ":" + item data path` (for example `report-123:/sections/0/items/1`). Map the unsigned hash with `(hash % 561 - 280) / 100` to -2.80 through +2.80 degrees, including near-horizontal values. The report ID and paths are stable across in-page edits, undo, theme/font changes, drafts, and export/reopen. Reordering JSON entries assigns angles by their new positions; preserve the report ID when editing an existing report.
+
+A wrapper reserves horizontal clearance and enough vertical space for the rotated single-line bounds, even when the toggle is off. A size observer rechecks each label after wrapping, font changes, editing, and viewport changes. Multi-line labels remain horizontal, retain their full text, and regain their assigned angle when they fit on one line. Without a size observer, resize, editing, font, and appearance events still trigger measurements. Print events recheck layout and retain the current toggle.
+
+Drafts and exported snapshots store the boolean with the existing appearance object; missing fields in older states default to enabled. CLI `--badge-tilt on|off` sets the generated appearance without changing the report content schema, ID, or revision rules. Already-generated HTML remains unchanged until explicitly regenerated with this template.
 
 ### Chart interactions
 

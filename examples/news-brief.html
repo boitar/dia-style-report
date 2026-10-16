@@ -50,8 +50,11 @@ button:disabled { opacity:.45; cursor:default; }
 .item { display:grid; grid-template-columns:170px minmax(0,1fr); gap:24px; padding:18px 0; border-top:1px solid var(--rule); }
 .item:first-child { border-top:0; padding-top:0; }
 .item-label,.item-body { min-width:0; }
-.item-title { font:600 15px/1.5 var(--sans); margin:0 0 8px; }
-.badge { display:inline-block; padding:3px 8px; border-radius:2px; background:var(--badge); color:var(--soft); font:12px/1.5 var(--sans); letter-spacing:.04em; }
+.item-label { display:flex; flex-wrap:wrap; gap:8px 10px; align-items:baseline; align-content:flex-start; }
+.item-title { min-width:0; max-width:100%; font:600 15px/1.5 var(--sans); margin:0; }
+.badge-frame { min-width:0; max-width:100%; padding:var(--badge-clearance,5px) 3px; }
+.badge { display:inline-block; max-width:100%; padding:3px 8px; border:1px solid var(--mute); border-radius:2px; background:var(--paper); color:var(--soft); font:12px/1.5 var(--sans); letter-spacing:.08em; transform-origin:center; }
+html[data-badge-tilt="true"] .badge[data-single-line="true"] { transform:rotate(var(--badge-angle,0deg)); }
 .item-body p { margin:0 0 10px; }
 .item-lead { font-weight:600; }
 .bullets { margin:8px 0 10px; padding-left:18px; color:var(--soft); font-size:14px; }
@@ -142,7 +145,6 @@ button:disabled { opacity:.45; cursor:default; }
   .section { margin:32px 0; }
   .section-heading,.conclusion h2 { font-size:20px; }
   .item { grid-template-columns:minmax(0,1fr); gap:10px; padding:20px 0; }
-  .item-label { display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; }
   .item-title { font-size:16px; margin:0; }
   .chart-entry { grid-template-columns:minmax(0,1fr); gap:18px; margin:24px 0 36px; }
   .chart-title { font-size:16px; margin-bottom:8px; }
@@ -210,6 +212,7 @@ button:disabled { opacity:.45; cursor:default; }
   <div class="settings-content">
   <fieldset><legend>Theme</legend><div class="theme-options" id="themeOptions"></div></fieldset>
   <fieldset><legend>Font</legend><div class="font-options" id="fontOptions"></div></fieldset>
+  <label class="edit-toggle"><input id="badgeTiltToggle" type="checkbox" checked><span>Subtle label tilt</span></label>
   <label class="edit-toggle"><input id="editingToggle" type="checkbox" checked><span>Allow text editing</span></label>
   <div class="panel-actions">
     <button class="action primary" id="saveHTML">Save HTML</button>
@@ -221,8 +224,8 @@ button:disabled { opacity:.45; cursor:default; }
 <button class="settings-btn editor-ui" id="settingsBtn" aria-label="Appearance &amp; save" aria-controls="settingsPanel" aria-expanded="false" title="Appearance &amp; save" lang="en">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82A1.65 1.65 0 0 0 3.16 14H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33A1.65 1.65 0 0 0 10 3.16V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82A1.65 1.65 0 0 0 20.84 10H21a2 2 0 0 1 0 4h-.09A1.65 1.65 0 0 0 19.4 15z"/></svg>
 </button>
-<script id="reportLocales" type="application/json">{"en":{"aliases":["en"],"publication":"Research report","reportTitle":"Dia Style Report","skipReport":"Skip to report","noScript":"Enable JavaScript in your browser to display and edit this report.","settingsTitle":"Appearance & save","closeSettings":"Close settings","themeLabel":"Theme","fontLabel":"Font","editingLabel":"Allow text editing","saveHtml":"Save HTML","undoEdit":"Undo last text edit","initialStatus":"Save HTML downloads a file containing your changes.","readingTip":"Click text to edit it. Use the bottom-right gear to change the theme or font, or save your edited HTML.","editDescription":"Editable text","editDescriptionSingleLine":"Editable text. Press Enter to finish editing.","savedStatus":"Draft saved in this browser. Save HTML to keep a portable copy.","storageUnavailableStatus":"This browser cannot save drafts. Use Save HTML to keep your changes.","draftUnavailableStatus":"Browser drafts are unavailable. Use Save HTML to keep your changes.","exportedStatus":"Download created. Reopen the downloaded HTML to continue editing.","restoredStatus":"Restored a newer draft from this browser.","undoStatus":"Undid the last text edit.","chartBaseline":"Axis starts at {min}, not zero. Bar lengths show differences above this baseline.","chartScrollHint":"Scroll within the chart to read all labels.","chartPointHint":"Hover or focus to read details. Click, Enter or Space pins or closes them; Escape dismisses.","themes":{"paper":"Paper","white":"White","sage":"Sage","night":"Night"},"fonts":{"editorial":"Editorial · serif headings, sans-serif body","modern":"Modern · sans-serif headings and body","serif":"Serif · serif headings and body"}},"zh-CN":{"aliases":["zh","zh-CN","zh-SG","zh-Hans"],"publication":"研究报告","reportTitle":"Dia 风格报告","skipReport":"跳到报告","noScript":"此报告需要浏览器启用 JavaScript 来显示和编辑文字。","settingsTitle":"外观与保存","closeSettings":"关闭设置","themeLabel":"色调","fontLabel":"字体","editingLabel":"允许编辑文字","saveHtml":"保存 HTML","undoEdit":"撤销上次文字修改","initialStatus":"保存 HTML 会下载包含修改的文件。","readingTip":"点文字即可编辑。右下角可换色调、字体，或保存修改后的 HTML。","editDescription":"可直接编辑文字","editDescriptionSingleLine":"可直接编辑文字，Enter 结束编辑","savedStatus":"草稿已保存在本浏览器。保存 HTML 可带走修改。","storageUnavailableStatus":"浏览器无法保存草稿，请使用“保存 HTML”保留修改。","draftUnavailableStatus":"浏览器草稿不可用，请通过“保存 HTML”保留修改。","exportedStatus":"已生成下载。重新打开下载的 HTML 可继续编辑。","restoredStatus":"已恢复本浏览器中的较新草稿。","undoStatus":"已撤销上次文字修改。","chartBaseline":"坐标轴从 {min} 开始，并非零基线；柱长表示高于该起点的差值。","chartScrollHint":"可在图表区域横向滚动，查看完整标签。","chartPointHint":"悬停或聚焦查看明细；点按、Enter 或空格可固定或关闭，Escape 关闭。","themes":{"paper":"暖纸","white":"素白","sage":"青灰","night":"夜读"},"fonts":{"editorial":"书刊 · 宋体标题，黑体正文","modern":"简洁 · 黑体标题与正文","serif":"宋体 · 标题与正文"}},"ja":{"aliases":["ja"],"publication":"調査レポート","reportTitle":"Dia スタイルレポート","skipReport":"レポートへ移動","noScript":"このレポートを表示・編集するには、ブラウザーの JavaScript を有効にしてください。","settingsTitle":"外観と保存","closeSettings":"設定を閉じる","themeLabel":"色調","fontLabel":"フォント","editingLabel":"文字の編集を許可","saveHtml":"HTML を保存","undoEdit":"直前の文字編集を取り消す","initialStatus":"「HTML を保存」で変更を含むファイルをダウンロードできます。","readingTip":"文章をクリックして編集できます。右下の歯車で色調やフォントを変更し、編集した HTML を保存できます。","editDescription":"直接編集できる文章","editDescriptionSingleLine":"直接編集できる文章。Enter で編集を終了します。","savedStatus":"このブラウザーに下書きを保存しました。「HTML を保存」でファイルとして残せます。","storageUnavailableStatus":"このブラウザーでは下書きを保存できません。「HTML を保存」で変更を残してください。","draftUnavailableStatus":"ブラウザーの下書きを利用できません。「HTML を保存」で変更を残してください。","exportedStatus":"ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。","restoredStatus":"このブラウザーから新しい下書きを復元しました。","undoStatus":"直前の文字編集を取り消しました。","chartBaseline":"軸の起点は {min} で、ゼロではありません。棒の長さは起点からの差を示します。","chartScrollHint":"グラフ内を横にスクロールすると、すべてのラベルを確認できます。","chartPointHint":"ホバーまたはフォーカスで詳細を表示。クリック、Enter、スペースで固定・解除、Escape で閉じます。","themes":{"paper":"ペーパー","white":"ホワイト","sage":"セージ","night":"夜間"},"fonts":{"editorial":"書籍 · 明朝の見出しとゴシックの本文","modern":"シンプル · 見出しも本文もゴシック","serif":"明朝 · 見出しと本文"}},"zh-TW":{"aliases":["zh-TW","zh-HK","zh-MO","zh-Hant"],"publication":"研究報告","reportTitle":"Dia 風格報告","skipReport":"跳至報告","noScript":"此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。","settingsTitle":"外觀與儲存","closeSettings":"關閉設定","themeLabel":"色調","fontLabel":"字型","editingLabel":"允許編輯文字","saveHtml":"儲存 HTML","undoEdit":"復原上次文字修改","initialStatus":"儲存 HTML 會下載包含修改的檔案。","readingTip":"點選文字即可編輯。右下角可切換色調、字型，或儲存修改後的 HTML。","editDescription":"可直接編輯文字","editDescriptionSingleLine":"可直接編輯文字，按 Enter 結束編輯","savedStatus":"草稿已儲存在本瀏覽器。儲存 HTML 可保留可攜式副本。","storageUnavailableStatus":"瀏覽器無法儲存草稿，請使用「儲存 HTML」保留修改。","draftUnavailableStatus":"瀏覽器草稿無法使用，請透過「儲存 HTML」保留修改。","exportedStatus":"已產生下載。重新開啟下載的 HTML 可繼續編輯。","restoredStatus":"已還原本瀏覽器中較新的草稿。","undoStatus":"已復原上次文字修改。","chartBaseline":"座標軸從 {min} 開始，並非零基線；柱長表示高於該起點的差值。","chartScrollHint":"可在圖表區域橫向捲動，查看完整標籤。","chartPointHint":"懸停或聚焦查看明細；點按、Enter 或空白鍵可固定或關閉，Escape 關閉。","themes":{"paper":"暖紙","white":"素白","sage":"青灰","night":"夜讀"},"fonts":{"editorial":"書刊 · 襯線標題、無襯線正文","modern":"簡潔 · 無襯線標題與正文","serif":"襯線 · 標題與正文"}}}</script>
-<script id="reportState" type="application/json">{"data":{"version":1,"id":"example-news-20250624-en","language":"en","publication":"Technology notes","edition":"Historical news · June 2025","date":"2025-06-24","title":"Technology is changing more than the interface","lead":"Three updates highlight visual experience, model availability, and users' everyday choices.","intro":["Reading stories together makes patterns easier to see. This brief revisits events from June 2025 as a layout and content example; it is not a live news feed."],"metrics":[{"value":"3","label":"Selected stories","note":"Entries in this example"},{"value":"06.09-06.24","label":"Event dates","note":"June 2025"},{"value":"3","label":"Official sources","note":"Return to the originals"}],"sections":[{"title":"I. Three updates worth noting","items":[{"title":"Apple · Liquid Glass","tag":"Interface design","lead":"A new visual material connects interfaces across platforms.","paragraphs":["On June 9, 2025, Apple introduced the translucent Liquid Glass material and extended its new design to iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, and tvOS 26."],"sources":[{"label":"Apple Newsroom","url":"https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/","date":"2025-06-09"}]},{"title":"Google · Gemini 2.5","tag":"Artificial intelligence","lead":"Stable releases and a lightweight preview address different needs.","paragraphs":["On June 17, 2025, Google announced general availability of Gemini 2.5 Pro and Flash, alongside a Flash-Lite preview. These are distinct release stages and should not be described as identical."],"sources":[{"label":"Google official blog","url":"https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/","date":"2025-06-17"}]},{"title":"Firefox · 140","tag":"Browser","lead":"More everyday operations can be left to the user.","paragraphs":["Firefox 140, released on June 24, 2025, supports custom search engines, unloading tabs from the tab context menu, and resizing the pinned section of vertical tabs."],"sources":[{"label":"Firefox release notes","url":"https://www.firefox.com/en-US/firefox/140.0/releasenotes/","date":"2025-06-24"}]}]},{"title":"II. Reading them together","paragraphs":["Editorial observation: interfaces, models, and browsers are different product layers, but one question connects this reading: how do they change the relationship between users and tools? This is an editorial perspective, not an announced shared strategy."]}],"conclusion":{"title":"Keep one clear thread","paragraphs":["A brief does not need to repeat every detail. State what happened and when, then leave a source the reader can check and a question worth pursuing."]},"footerNote":"Prepared on 2026-10-13 as a retrospective of June 2025 events. Text is a short summary of the linked official sources. Metrics describe this example, not market statistics."},"appearance":{"theme":"paper","font":"editorial","editing":true},"revision":"b06f49c79e78cc27b489c9cb0e64c6ca30e34486d41865cd39512558336d0661","updatedAt":0}</script>
+<script id="reportLocales" type="application/json">{"en":{"aliases":["en"],"publication":"Research report","reportTitle":"Dia Style Report","skipReport":"Skip to report","noScript":"Enable JavaScript in your browser to display and edit this report.","settingsTitle":"Appearance & save","closeSettings":"Close settings","themeLabel":"Theme","fontLabel":"Font","badgeTiltLabel":"Subtle label tilt","editingLabel":"Allow text editing","saveHtml":"Save HTML","undoEdit":"Undo last text edit","initialStatus":"Save HTML downloads a file containing your changes.","readingTip":"Click text to edit it. Use the bottom-right gear to change the theme or font, or save your edited HTML.","editDescription":"Editable text","editDescriptionSingleLine":"Editable text. Press Enter to finish editing.","savedStatus":"Draft saved in this browser. Save HTML to keep a portable copy.","storageUnavailableStatus":"This browser cannot save drafts. Use Save HTML to keep your changes.","draftUnavailableStatus":"Browser drafts are unavailable. Use Save HTML to keep your changes.","exportedStatus":"Download created. Reopen the downloaded HTML to continue editing.","restoredStatus":"Restored a newer draft from this browser.","undoStatus":"Undid the last text edit.","chartBaseline":"Axis starts at {min}, not zero. Bar lengths show differences above this baseline.","chartScrollHint":"Scroll within the chart to read all labels.","chartPointHint":"Hover or focus to read details. Click, Enter or Space pins or closes them; Escape dismisses.","themes":{"paper":"Paper","white":"White","sage":"Sage","night":"Night"},"fonts":{"editorial":"Editorial · serif headings, sans-serif body","modern":"Modern · sans-serif headings and body","serif":"Serif · serif headings and body"}},"zh-CN":{"aliases":["zh","zh-CN","zh-SG","zh-Hans"],"publication":"研究报告","reportTitle":"Dia 风格报告","skipReport":"跳到报告","noScript":"此报告需要浏览器启用 JavaScript 来显示和编辑文字。","settingsTitle":"外观与保存","closeSettings":"关闭设置","themeLabel":"色调","fontLabel":"字体","badgeTiltLabel":"标签微倾斜","editingLabel":"允许编辑文字","saveHtml":"保存 HTML","undoEdit":"撤销上次文字修改","initialStatus":"保存 HTML 会下载包含修改的文件。","readingTip":"点文字即可编辑。右下角可换色调、字体，或保存修改后的 HTML。","editDescription":"可直接编辑文字","editDescriptionSingleLine":"可直接编辑文字，Enter 结束编辑","savedStatus":"草稿已保存在本浏览器。保存 HTML 可带走修改。","storageUnavailableStatus":"浏览器无法保存草稿，请使用“保存 HTML”保留修改。","draftUnavailableStatus":"浏览器草稿不可用，请通过“保存 HTML”保留修改。","exportedStatus":"已生成下载。重新打开下载的 HTML 可继续编辑。","restoredStatus":"已恢复本浏览器中的较新草稿。","undoStatus":"已撤销上次文字修改。","chartBaseline":"坐标轴从 {min} 开始，并非零基线；柱长表示高于该起点的差值。","chartScrollHint":"可在图表区域横向滚动，查看完整标签。","chartPointHint":"悬停或聚焦查看明细；点按、Enter 或空格可固定或关闭，Escape 关闭。","themes":{"paper":"暖纸","white":"素白","sage":"青灰","night":"夜读"},"fonts":{"editorial":"书刊 · 宋体标题，黑体正文","modern":"简洁 · 黑体标题与正文","serif":"宋体 · 标题与正文"}},"ja":{"aliases":["ja"],"publication":"調査レポート","reportTitle":"Dia スタイルレポート","skipReport":"レポートへ移動","noScript":"このレポートを表示・編集するには、ブラウザーの JavaScript を有効にしてください。","settingsTitle":"外観と保存","closeSettings":"設定を閉じる","themeLabel":"色調","fontLabel":"フォント","badgeTiltLabel":"ラベルを少し傾ける","editingLabel":"文字の編集を許可","saveHtml":"HTML を保存","undoEdit":"直前の文字編集を取り消す","initialStatus":"「HTML を保存」で変更を含むファイルをダウンロードできます。","readingTip":"文章をクリックして編集できます。右下の歯車で色調やフォントを変更し、編集した HTML を保存できます。","editDescription":"直接編集できる文章","editDescriptionSingleLine":"直接編集できる文章。Enter で編集を終了します。","savedStatus":"このブラウザーに下書きを保存しました。「HTML を保存」でファイルとして残せます。","storageUnavailableStatus":"このブラウザーでは下書きを保存できません。「HTML を保存」で変更を残してください。","draftUnavailableStatus":"ブラウザーの下書きを利用できません。「HTML を保存」で変更を残してください。","exportedStatus":"ダウンロードを作成しました。保存した HTML を開き直すと編集を続けられます。","restoredStatus":"このブラウザーから新しい下書きを復元しました。","undoStatus":"直前の文字編集を取り消しました。","chartBaseline":"軸の起点は {min} で、ゼロではありません。棒の長さは起点からの差を示します。","chartScrollHint":"グラフ内を横にスクロールすると、すべてのラベルを確認できます。","chartPointHint":"ホバーまたはフォーカスで詳細を表示。クリック、Enter、スペースで固定・解除、Escape で閉じます。","themes":{"paper":"ペーパー","white":"ホワイト","sage":"セージ","night":"夜間"},"fonts":{"editorial":"書籍 · 明朝の見出しとゴシックの本文","modern":"シンプル · 見出しも本文もゴシック","serif":"明朝 · 見出しと本文"}},"zh-TW":{"aliases":["zh-TW","zh-HK","zh-MO","zh-Hant"],"publication":"研究報告","reportTitle":"Dia 風格報告","skipReport":"跳至報告","noScript":"此報告需要瀏覽器啟用 JavaScript，才能顯示及編輯文字。","settingsTitle":"外觀與儲存","closeSettings":"關閉設定","themeLabel":"色調","fontLabel":"字型","badgeTiltLabel":"標籤微傾斜","editingLabel":"允許編輯文字","saveHtml":"儲存 HTML","undoEdit":"復原上次文字修改","initialStatus":"儲存 HTML 會下載包含修改的檔案。","readingTip":"點選文字即可編輯。右下角可切換色調、字型，或儲存修改後的 HTML。","editDescription":"可直接編輯文字","editDescriptionSingleLine":"可直接編輯文字，按 Enter 結束編輯","savedStatus":"草稿已儲存在本瀏覽器。儲存 HTML 可保留可攜式副本。","storageUnavailableStatus":"瀏覽器無法儲存草稿，請使用「儲存 HTML」保留修改。","draftUnavailableStatus":"瀏覽器草稿無法使用，請透過「儲存 HTML」保留修改。","exportedStatus":"已產生下載。重新開啟下載的 HTML 可繼續編輯。","restoredStatus":"已還原本瀏覽器中較新的草稿。","undoStatus":"已復原上次文字修改。","chartBaseline":"座標軸從 {min} 開始，並非零基線；柱長表示高於該起點的差值。","chartScrollHint":"可在圖表區域橫向捲動，查看完整標籤。","chartPointHint":"懸停或聚焦查看明細；點按、Enter 或空白鍵可固定或關閉，Escape 關閉。","themes":{"paper":"暖紙","white":"素白","sage":"青灰","night":"夜讀"},"fonts":{"editorial":"書刊 · 襯線標題、無襯線正文","modern":"簡潔 · 無襯線標題與正文","serif":"襯線 · 標題與正文"}}}</script>
+<script id="reportState" type="application/json">{"data":{"version":1,"id":"example-news-20250624-en","language":"en","publication":"Technology notes","edition":"Historical news · June 2025","date":"2025-06-24","title":"Technology is changing more than the interface","lead":"Three updates highlight visual experience, model availability, and users' everyday choices.","intro":["Reading stories together makes patterns easier to see. This brief revisits events from June 2025 as a layout and content example; it is not a live news feed."],"metrics":[{"value":"3","label":"Selected stories","note":"Entries in this example"},{"value":"06.09-06.24","label":"Event dates","note":"June 2025"},{"value":"3","label":"Official sources","note":"Return to the originals"}],"sections":[{"title":"I. Three updates worth noting","items":[{"title":"Apple · Liquid Glass","tag":"Interface design","lead":"A new visual material connects interfaces across platforms.","paragraphs":["On June 9, 2025, Apple introduced the translucent Liquid Glass material and extended its new design to iOS 26, iPadOS 26, macOS Tahoe 26, watchOS 26, and tvOS 26."],"sources":[{"label":"Apple Newsroom","url":"https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/","date":"2025-06-09"}]},{"title":"Google · Gemini 2.5","tag":"Artificial intelligence","lead":"Stable releases and a lightweight preview address different needs.","paragraphs":["On June 17, 2025, Google announced general availability of Gemini 2.5 Pro and Flash, alongside a Flash-Lite preview. These are distinct release stages and should not be described as identical."],"sources":[{"label":"Google official blog","url":"https://blog.google/products-and-platforms/products/gemini/gemini-2-5-model-family-expands/","date":"2025-06-17"}]},{"title":"Firefox · 140","tag":"Browser","lead":"More everyday operations can be left to the user.","paragraphs":["Firefox 140, released on June 24, 2025, supports custom search engines, unloading tabs from the tab context menu, and resizing the pinned section of vertical tabs."],"sources":[{"label":"Firefox release notes","url":"https://www.firefox.com/en-US/firefox/140.0/releasenotes/","date":"2025-06-24"}]}]},{"title":"II. Reading them together","paragraphs":["Editorial observation: interfaces, models, and browsers are different product layers, but one question connects this reading: how do they change the relationship between users and tools? This is an editorial perspective, not an announced shared strategy."]}],"conclusion":{"title":"Keep one clear thread","paragraphs":["A brief does not need to repeat every detail. State what happened and when, then leave a source the reader can check and a question worth pursuing."]},"footerNote":"Prepared on 2026-10-13 as a retrospective of June 2025 events. Text is a short summary of the linked official sources. Metrics describe this example, not market statistics."},"appearance":{"theme":"paper","font":"editorial","badgeTilt":true,"editing":true},"revision":"b06f49c79e78cc27b489c9cb0e64c6ca30e34486d41865cd39512558336d0661","updatedAt":0}</script>
 <script>
 (() => {
   'use strict';
@@ -242,7 +245,7 @@ button:disabled { opacity:.45; cursor:default; }
   const uiLanguage=resolveUILanguage(data.language),ui=locales[uiLanguage],fonts=ui.fonts;
   let reportLanguage=uiLanguage;
   try {reportLanguage=Intl.getCanonicalLocales((data.language||'en').trim().replace(/_/g,'-'))[0]||uiLanguage;} catch {}
-  const appearance = {theme:'paper',font:'editorial',editing:true,...embedded.appearance};
+  const appearance = {theme:'paper',font:'editorial',badgeTilt:true,editing:true,...embedded.appearance};
   const fields = new Map(), mirrors = new Map(), edits = {}, history = [];
   let updatedAt = Number(embedded.updatedAt) || 0, timer, storageAvailable = true, focusBefore = null;
   const root = document.getElementById('report'), panel = document.getElementById('settingsPanel'), gear = document.getElementById('settingsBtn');
@@ -253,8 +256,46 @@ button:disabled { opacity:.45; cursor:default; }
   const storageKey = 'editorial-report:v1:' + data.id;
   document.documentElement.dataset.uiLanguage=uiLanguage;
   const make = (tag,cls,value) => { const n=document.createElement(tag); if(cls)n.className=cls; if(value!==undefined)n.textContent=value; return n; };
+  const badges=new Set();
+  let badgeLayoutFrame=0;
+  function refreshBadges() {
+    const layouts=[];
+    for(const badge of badges){
+      const style=getComputedStyle(badge);
+      const height=badge.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom);
+      const singleLine=height<=parseFloat(style.lineHeight)+1;
+      const angle=Math.abs(parseFloat(badge.style.getPropertyValue('--badge-angle')))*Math.PI/180;
+      // Reserve half the rotated height growth on each side; wrapped text stays flat.
+      const clearance=singleLine?Math.ceil(Math.max(0,(badge.offsetWidth*Math.sin(angle)+badge.offsetHeight*Math.cos(angle)-badge.offsetHeight)/2))+1:0;
+      layouts.push([badge,String(singleLine),clearance+'px']);
+    }
+    for(const [badge,singleLine,clearance]of layouts){
+      if(badge.dataset.singleLine!==singleLine)badge.dataset.singleLine=singleLine;
+      if(badge.parentElement.style.getPropertyValue('--badge-clearance')!==clearance)badge.parentElement.style.setProperty('--badge-clearance',clearance);
+    }
+  }
+  function scheduleBadgeLayout() {
+    if(badgeLayoutFrame)return;
+    badgeLayoutFrame=requestAnimationFrame(()=>{badgeLayoutFrame=0;refreshBadges();});
+  }
+  const badgeObserver=typeof ResizeObserver==='undefined'?null:new ResizeObserver(scheduleBadgeLayout);
+  function badgeView(path,itemPath) {
+    // Hash only the stable identity/location, never editable text or appearance.
+    let hash=2166136261;
+    for(const char of data.id+':'+itemPath)hash=Math.imul(hash^char.charCodeAt(0),16777619)>>>0;
+    const frame=make('span','badge-frame'),badge=editable('span','badge',path);
+    badge.style.setProperty('--badge-angle',((hash%561-280)/100).toFixed(2)+'deg');
+    frame.append(badge);badges.add(badge);badgeObserver?.observe(badge);
+    return frame;
+  }
+  window.addEventListener('resize',scheduleBadgeLayout);
+  window.addEventListener('beforeprint',refreshBadges);
+  window.addEventListener('afterprint',scheduleBadgeLayout);
+  document.fonts?.ready.then(scheduleBadgeLayout);
+  document.fonts?.addEventListener('loadingdone',scheduleBadgeLayout);
   const chartViews=[],chartContainers=new Map(),measure=document.createElement('canvas').getContext('2d');
   const printQuery=window.matchMedia('print');
+  printQuery.addEventListener('change',refreshBadges);
   const chartTooltip=make('div','chart-tooltip editor-ui');
   chartTooltip.id='chartTooltip';chartTooltip.setAttribute('role','tooltip');chartTooltip.hidden=true;chartTooltip.lang=uiLanguage;document.body.append(chartTooltip);
   let activeChartPoint=null,tooltipTimer,tooltipHovered=false;
@@ -460,6 +501,7 @@ button:disabled { opacity:.45; cursor:default; }
   function safeURL(value) { try { const u=new URL(value); return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password ? u.href : null; } catch { return null; } }
   function render() {
     hideChartTooltip();chartObserver?.disconnect();chartViews.length=0;chartContainers.clear();
+    badgeObserver?.disconnect();badges.clear();
     root.replaceChildren(); fields.clear(); mirrors.clear();
     const header=make('header','report-header');
     header.append(editable('span','publication','/publication'));
@@ -480,7 +522,7 @@ button:disabled { opacity:.45; cursor:default; }
       if(section.table)el.append(tableView(section.table,p+'/table'));
       if(section.items?.length){const items=make('div','section-items');section.items.forEach((item,j)=>{
         const q=p+'/items/'+j, article=make('article','item'),label=make('div','item-label'),body=make('div','item-body');
-        label.append(editable('h3','item-title',q+'/title')); if(item.tag)label.append(editable('span','badge',q+'/tag'));
+        label.append(editable('h3','item-title',q+'/title')); if(item.tag)label.append(badgeView(q+'/tag',q));
         if(item.lead)body.append(editable('p','item-lead',q+'/lead',true)); paragraphs(body,item.paragraphs,q+'/paragraphs');
         if(item.bullets?.length){const ul=make('ul','bullets');item.bullets.forEach((_,k)=>ul.append(editable('li','',q+'/bullets/'+k,true)));body.append(ul);}
         if(item.sources?.length){const sources=make('div','sources');item.sources.forEach(source=>{const href=safeURL(source.url);if(!href)return;const a=make('a','cite','['+(++sourceNumber)+'] '+source.label);a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.title=source.date?source.label+' · '+source.date:source.label;sources.append(a);});body.append(sources);}
@@ -498,11 +540,15 @@ button:disabled { opacity:.45; cursor:default; }
     if(!Object.hasOwn(themes,appearance.theme))appearance.theme='paper';
     if(!Object.hasOwn(fonts,appearance.font))appearance.font='editorial';
     appearance.editing=appearance.editing!==false;
+    appearance.badgeTilt=appearance.badgeTilt!==false;
     document.documentElement.dataset.theme=appearance.theme; document.documentElement.dataset.font=appearance.font;
+    document.documentElement.dataset.badgeTilt=String(appearance.badgeTilt);
     for(const el of fields.values()){el.contentEditable=appearance.editing?'plaintext-only':'false';if(appearance.editing)el.tabIndex=el.tagName==='TH'&&tableQuery.matches?-1:0;else el.removeAttribute('tabindex');}
     document.querySelectorAll('[data-theme-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.themeChoice===appearance.theme)));
     document.querySelectorAll('[data-font-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.fontChoice===appearance.font)));
     document.getElementById('editingToggle').checked=appearance.editing;
+    document.getElementById('badgeTiltToggle').checked=appearance.badgeTilt;
+    scheduleBadgeLayout();
     requestAnimationFrame(refreshCharts);
   }
   function update(path,value) {
@@ -510,6 +556,7 @@ button:disabled { opacity:.45; cursor:default; }
     write(path,value); edits[path]=value;
     for(const mirror of mirrors.get(path)||[])mirror.textContent=value;
     if(path==='/title')document.title=value||ui.reportTitle;
+    if(badges.has(fields.get(path)))scheduleBadgeLayout();
   }
   function persist() {
     clearTimeout(timer);
@@ -566,10 +613,13 @@ button:disabled { opacity:.45; cursor:default; }
   tableQuery.addEventListener('change',applyAppearance);
   document.getElementById('closeSettings').addEventListener('click',()=>showPanel(false,true));
   document.getElementById('editingToggle').addEventListener('change',event=>{appearance.editing=event.target.checked;applyAppearance();changed();});
+  document.getElementById('badgeTiltToggle').addEventListener('change',event=>{appearance.badgeTilt=event.target.checked;applyAppearance();changed();});
   document.getElementById('saveHTML').addEventListener('click',downloadHTML);
   undo.addEventListener('click',()=>{const entry=history.pop();if(!entry)return;update(entry.path,entry.before);fields.get(entry.path).textContent=entry.before;undo.disabled=!history.length;changed();status.textContent=ui.undoStatus;});
   root.addEventListener('focusin',event=>{const el=event.target;if(el.dataset.edit)focusBefore={path:el.dataset.edit,value:read(el.dataset.edit)};});
   root.addEventListener('focusout',event=>{const el=event.target;if(el.dataset.edit&&focusBefore?.path===el.dataset.edit){const after=read(el.dataset.edit);if(after!==focusBefore.value){history.push({path:el.dataset.edit,before:focusBefore.value,after});if(history.length>50)history.shift();undo.disabled=false;}focusBefore=null;}});
+  root.addEventListener('focusin',scheduleBadgeLayout);
+  root.addEventListener('focusout',scheduleBadgeLayout);
   root.addEventListener('input',event=>{const el=event.target;if(!el.dataset.edit)return;update(el.dataset.edit,el.innerText.replace(/\r\n?/g,'\n'));changed();});
   root.addEventListener('paste',event=>{const el=event.target.closest('[data-edit]');if(!el||!appearance.editing)return;event.preventDefault();const plain=event.clipboardData.getData('text/plain');document.execCommand('insertText',false,plain);});
   root.addEventListener('drop',event=>{if(event.target.closest('[data-edit]'))event.preventDefault();});

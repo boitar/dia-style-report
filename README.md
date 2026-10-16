@@ -42,7 +42,7 @@ Turn a question, a few news stories, or a collection of notes into a single-file
 - **Chooses layouts to fit the content**: supports paragraphs, categorized entries, lists, comparison tables, source links, and a metrics strip when reliable data is available.
 - **Adds interactive comparisons**: horizontal rankings and outlined vertical bars, with hover, touch, and keyboard details. Chart data comes from JSON; there is no in-page data editor.
 - **Lets you edit reports directly**: click text to change it and undo the last text edit. Browser drafts and saved files are separate.
-- **Offers appearance presets**: four color themes—Paper, White, Sage, and Night—and three font presets: Editorial, Modern, and Serif.
+- **Offers appearance presets**: four color themes—Paper, White, Sage, and Night—and three font presets: Editorial, Modern, and Serif. Fine-outlined category labels have an optional, stable subtle tilt.
 - **Makes reports portable**: read on desktop or mobile, save an HTML file containing the current text and appearance, and reopen it to continue editing.
 
 The skill supplies content-organization guidance, a template, and a renderer. **It is not a standalone news crawler or AI service.** Research and writing depend on the host AI's capabilities. The renderer only reads JSON; it does not call a model or access the network.
@@ -172,6 +172,10 @@ python3 scripts/render_report.py \
 
 Theme options are `paper|white|sage|night`; font options are `editorial|modern|serif`. Existing output files are not overwritten by default. Add `--force` only when you intend to replace a file. Follow the [data specification](references/report-data.md) to prepare your own JSON.
 
+**Category labels**
+
+Labels use fine outlines and a subtle tilt by default. Turn off **Subtle label tilt** in the gear menu for horizontal labels, or generate with `--badge-tilt off` (`on` is the default). Each angle stays the same across text edits, undo, theme/font changes, refresh, and export/reopen. Long labels wrap without truncation and stay horizontal. Drafts and saved HTML retain the toggle; printing follows it too. Existing HTML does not update itself: regenerate it with the current template to add this control, preserving its current text and appearance.
+
 **Choose the report language**
 
 New reports default to English. Set `language` to `en`, `zh-CN`, `zh-TW`, or `ja` in JSON, or add `--language` to override the editor language. Controls, status messages, dates, and font stacks follow that choice. **This does not translate supplied prose**: ask the AI to write in the requested language, or use translated JSON.
@@ -186,7 +190,7 @@ python3 scripts/render_report.py \
 ### 3. Edit and save
 
 1. Open the HTML and click a heading or body text to edit it.
-2. Click the bottom-right gear to change the theme or font, or disable text editing.
+2. Click the bottom-right gear to change the theme, font, or label tilt, or disable text editing.
 3. Click **Save HTML** to download a file containing your changes.
 
 The browser does not write changes back to the original HTML file automatically. Drafts depend on local storage in the current browser and are not a substitute for saving a downloaded copy. Editing and downloading remain available when local storage is unavailable.
