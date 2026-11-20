@@ -198,10 +198,14 @@ class RenderReportTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
 
     def test_examples_are_reproducible(self):
+        appearance = {
+            "report-comparison": ("--theme", "sage", "--font", "modern"),
+            "chart-comparison": ("--theme", "white", "--font", "modern"),
+        }
         for source in sorted((ROOT / "examples").rglob("*.json")):
             with self.subTest(example=source.name):
-                comparison = source.stem.startswith("report-comparison")
-                flags = ("--force", "--theme", "sage", "--font", "modern") if comparison else ("--force",)
+                prefix = next((p for p in appearance if source.stem.startswith(p)), None)
+                flags = ("--force", *appearance.get(prefix, ()))
                 self.assertEqual(self.render(
                     json.loads(source.read_text(encoding="utf-8")), flags,
                 ).returncode, 0)
